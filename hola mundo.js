@@ -1,1 +1,0 @@
-alert("Hola mundo con JS! desde otro archivo...");
