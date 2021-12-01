@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hola mundo en JS :) </title>
+
+    <!-- 1. El codigo JS siempre va dentro de las etiquetas "script" cuando esta en un documento html -->
+
+    <!-- 2. Cada script (el codigo dentro de las etiquetas), debe ir al final o al comienzo de pa web... Nunca en medio. Lo mas recomendable es al final. -->
+    
+    <!-- 3. Hay varias formas de ejecutar js en una pagina web. -->
+
+    <!-- Una es colocandolo en el codigo de la web, con las etitquetas "script" -->
+
+    <script type="text/Javascript">
+        alert("Hola mundo con JS!! Desde html...");
+        document.write("Con esta sentencia se escribe en el html de la pagina!!");
+    </script>
+
+    <!-- La otra es importar un script usando la misma etiqueta, pero con el atributo src para indicar la direccion del script -->
+    <script type="text/Javascript" src="hola mundo.js"></script>
+
+    <!-- Notas: 
+    - Todo lo que este dentro de las etiquetas script es considerado javascript y se interpretara asi por el navegador
+    - Usando el atributo "type" se indica el lenguaje para las etiquetas script (necesario para navegadores antiguos)
+    - Con la sentencia "alert" y enviando como parametro una cadena, se muestra una alerta en el navegador con el mensaje enviado como parametro.
+    - Con la sentencia "document.write" enviando como parametro una sentencia se puede escribir en el HTML de la pagina
+    - Cada instruccion se ejecuta consecuentemente (una despues de la otra)
+    - Cuando se importa con la etiqueta script no se scribe nada dentro de las etiquetas
+    -->
+
+</head>
+    
+<body>
+
+<h1>Curso de javascript by: VictorRoblesweb.es</h1>
+<p>Hola mundo en JS!! Primer script del curso...</p>
+    
+</body>
+
+</html>
