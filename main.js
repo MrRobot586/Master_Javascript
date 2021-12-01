@@ -1,19 +1,35 @@
 /*
-    - Para activar el modo estricto de JS: Se usa la sentencia 'use strict' al principio de cada fichero JS
-    - Este modo sirve para que el interpretador del navegador sea mas estricto con la sintacxis del lenguaje
-    por lo que si por ejemplo, no se define una variable correctamente se mostrara un error. 
-    - El lenguaje Javascript es debilmente tipado, por lo que si se define una variable asi:
-        pais = "españa"; - Entonces el codigo funcionara sin problemas
-    con el modo estricto esto no es asi, te mostrara un error, debe usarse la palabra reservada var.
+    Var Vs Let en JS
 
-    - Es recomendable usar el modo estricto para todos los ficheros JS
+    - 
 */
 
-//'use strict'
+'use strict'
 
-var continente = "Latinoamerica"; // Esto funcionara en modo stricto.
-console.log(continente);
+//Ejemplo 1: Usando var se define una variable global cuyo valor cambia cuando se reasigna o se vuelve a declarar la variable
+var a = "Valor 1";
 
-pais = "Venezuela"; // Esto no, pero si funcionara si no esta activado el modo stricto.
-console.log(pais);
+console.log(a);// Tiene como salida "Valor 1"
+
+if(true){
+    var a = "Valor 2";// Al usar var se redefine la variable con el mismo nombre. Por lo que de este punto en adelante, el valor sera el que se le asigne aqui
+    console.log(a);// Tiene como salida "Valor 2"
+}
+
+console.log(a);// Tiene como salida "Valor 2"
+
+/* Al usar var para declarar la variable, esta se declara de forma gloval y su valor cambiara independientemente del bloque en el que se use */
+
+
+//Ejemplo 2: Usando let se define una variable a nivel de bloque. Es decir, esta solo tiene ese valor en ese bloque o ambito
+var b = "Valor 3";
+
+console.log(b);// tiene como salida "Valor 3"
+
+if(true){
+    let b = "Valor 4";// Al usar let, no se redefine la variable. Sino que se crea una nueva dentro de este bllque
+    console.log(b);// Tiene como salida "Valor 4"
+}
+
+console.log(b);// Tiene como salida "Valor 3"
 
