@@ -1,43 +1,31 @@
 /*
-    Bucles en JS los 3 bucles en 1
-    
-    - Estructuras de control que repiten una determinada sentencia mientras se cumpla una condicion o un numero determinado de veces
-    - Tal y como conoces a los bucles, solo que aplicando las bondades de js
-    - For, while y do while
+    Alertas y ventanas en JS
+
+    - Existen algunas funciones en JS que permiten crear alertas para advertir al usuario de algo en el navegador
 */
 
 'use strict'
 
-// Bucle For
+// Alert - Esta funcion muestra una alerta en el navegador a la que simplemente le puedes dar aceptar
 
-console.log("Resultado del bucle for:");
-for (let i = 0; i < 10; i++){ // Se crea una variable local (con let, esto significa que no existira mas que en este bloque), se inicializa en 0 y se intera hasta llegar a menor que 10
-    console.log(i+1); // Se imprime dicha variable sumandole 1, porque inicia desde 0
+alert("Esta es una alerta normal...");
+
+// Confirm - Esta funcion envia una alerta que bien puedes aceptar o cancelar. Para despues evaluar si el usuario acepto o cancelo
+
+confirm("Ejemplo de una alerta de confirmacion. \n¿Estas seguro de querer continuar?"); // Recordar que con \n se hace un salto de linea en un string 
+// Esta funcion por lo general se usa con una condicional para verificar su resultado, devuelve true cuando el usuario acepta y false cuando no.
+
+if(confirm("Esta es una alerta de confirmacion. \n¿Estas seguro de querer continuar?")){ // SI esta funcion es true \\ Si el usuario acepta
+    console.log("Aceptaste!!");
+}else{ // Sino
+    console.log("No aceptaste...");
 }
 
-//debugger; // Con esta instruccion se puede ver mediante la consola, la ejecucion del script o programa
+// Prompt - Sirven para pedir datos al usuario, es una alerta que pide que ingreses un dato y luego devuelve ese dato en forma de string (independeintemente del dato)
+// Esta recibe 2 parametros el primero es un string (que se mostrara en la alerta) y el segundo es el dato por defecto (en caso de que no se ingrese ningun dato)
 
-// Bucle while
+var dato = prompt("¿Que edad tienes?", 0);
 
-console.log("Resultado del bucle while:");
+console.log("La edad es: ", dato , " años..."); // Recordar que tambien se puede imprimir el valor de la variable simplemente poninedolo como parametro de la funcion console.log
 
-var year = 2018; // Inicializacion de variable
-
-while(year <= 2077){ // Mientras year sea menor o igual a 2077
-    console.log("El año es: " + year); // Imprimir esto
-    year++; // Sumarle 1 a year
-}
-
-// Bucle Do while
-
-var years = 30; // Se inicializa una variable en 30
-
-do{
-    alert("Esto solo se ejecuta cuando la variable years es mayor a 25..."); // Se imprime esto
-    years--; // Se le resta 1 a years (comenzando desde 30)
-
-    if(years == 28){ // Break - Para romper bucles
-        break; // Corta la ejecucion del bucle cuando years es igual a 28
-    }
-}while(years > 25); // Hasta llegar a 25 (mientras years sea mayor a 25, cuanudo sea menor se dejara de repetir)
-
+// Nota: En total son 3 funciones, todas mandan alertas al navegador y cada una tiene su particularidad
