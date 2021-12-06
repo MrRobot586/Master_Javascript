@@ -1,31 +1,35 @@
 /*
-    Alertas y ventanas en JS
+    Bloque 1 de ejersicios 
 
-    - Existen algunas funciones en JS que permiten crear alertas para advertir al usuario de algo en el navegador
+    - Hacer un programa que pida 2 numeros y que diga cual es mayor, cual es menor y si son iguales
 */
 
 'use strict'
 
-// Alert - Esta funcion muestra una alerta en el navegador a la que simplemente le puedes dar aceptar
+// Se piden los datos
+var n1 = prompt("Ingresa un nuemro y preciona aceptar..."); // Esta funcion tambien furula si no se coloca el valor default
+var n2 = prompt("Ingresa otro numero y preciona acpetar!"); // Es decir el segundo parametro
 
-alert("Esta es una alerta normal...");
+// Recordar convertir los datos a numero, porque al recolectar datos con prompt se devulven como strings
+n1 = parseInt(n1);
+n2 = parseInt(n2);
 
-// Confirm - Esta funcion envia una alerta que bien puedes aceptar o cancelar. Para despues evaluar si el usuario acepto o cancelo
-
-confirm("Ejemplo de una alerta de confirmacion. \n¿Estas seguro de querer continuar?"); // Recordar que con \n se hace un salto de linea en un string 
-// Esta funcion por lo general se usa con una condicional para verificar su resultado, devuelve true cuando el usuario acepta y false cuando no.
-
-if(confirm("Esta es una alerta de confirmacion. \n¿Estas seguro de querer continuar?")){ // SI esta funcion es true \\ Si el usuario acepta
-    console.log("Aceptaste!!");
-}else{ // Sino
-    console.log("No aceptaste...");
+// Se comprueba las condiciones
+if((n1 && n2) && (n1 != 0 && n2 != 0)){ // Si las variables estan llenas
+    if(n1 > n2){ // Si es menor
+        alert(n1 + " es mayor que " + n2); //
+        // alert(n1, " es mayor que ", n2); // La funcion alerta solo acpeta un parametro por lo que es mejor concatenar que separar por comas los datos
+    }else if(n1 < n2){ // Si es mayor
+        alert(n1 + " es menor que " + n2);
+    }else{ // Si son iguales
+        alert("Los numeros que ingresastes son iguales.");
+    }
+}else{ // Si no estan llenas
+    if(n1 == 0 && n2 == 0){
+        console.log("Los valores ingresados son 0...");
+    }else{
+        console.log("Recuerda ingresar datos en las ventanas flotoantes...");
+    }
 }
 
-// Prompt - Sirven para pedir datos al usuario, es una alerta que pide que ingreses un dato y luego devuelve ese dato en forma de string (independeintemente del dato)
-// Esta recibe 2 parametros el primero es un string (que se mostrara en la alerta) y el segundo es el dato por defecto (en caso de que no se ingrese ningun dato)
-
-var dato = prompt("¿Que edad tienes?", 0);
-
-console.log("La edad es: ", dato , " años..."); // Recordar que tambien se puede imprimir el valor de la variable simplemente poninedolo como parametro de la funcion console.log
-
-// Nota: En total son 3 funciones, todas mandan alertas al navegador y cada una tiene su particularidad
+// Nota: Recordar aplicar logica, si los valores no existen o no fueron llenados entonces no se puede comprobar la condicion
