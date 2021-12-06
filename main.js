@@ -1,51 +1,49 @@
 /*
     Bloque 1 de ejersicios 
 
-    - Hacer un programa que pida 2 numeros y que diga cual es mayor, cual es menor y si son iguales
-    - plus: Verificar si los numeros son realmente numeros y sino pedir nuevamente los datos
+    - Utilizando un bucle mostrar la media y la suma de los nuemros introducidos por el usuario hasta que se digite un numero negativo y en ese caso se mostraria el resultado
 */
 
 'use strict'
 
-// El problema de los datos incorrectos, se resuelve con un do while
+// Inicializacion de las variables
+var suma = 0;
+var contador = 0;
+var numero = 0;
+
+// Con un do while se iniciara la operacion y luego se evalua la condicion
 do{
-    // Se piden los datos
-    var n1 = prompt("Ingresa un nuemro y preciona aceptar..."); // Esta funcion tambien furula si no se coloca el valor default
-    var n2 = prompt("Ingresa otro numero y preciona acpetar!"); // Es decir el segundo parametro
+    numero = prompt("Ingresa un numero para la suma: ");// Le metemos un valor a numero
 
-    if(n1 != '' && n2 != ''){ // Si: n1 y n2 son distintas de cadena vacia
-        if(isNaN(n1) && isNaN(n2)){// Si: n1 y n2 no son numeros | La funcion IsNaN sirve para ver si un valor de una variable es o no un numero (si es devuelve false y sino true)
-            alert("Los datos ingresados, no son numeros.");
-        }else{
-            // Se convierten a numeros las variables
-            n1 = parseInt(n1);
-            n2 = parseInt(n2);
+    if(numero != ''){// Si numero no esta vacio
+        if(isNaN(numero)){// Se comprueba de que efectivamente es un numero, si no lo es:
+            alert("El dato que ingresaste no es un numero... Intentalo de nuevo!");// Se muestra una alerta
+            numero = 0;// Se iguala a cero la variable
+        }else{// Si la variable es un numero
+            numero = parseInt(numero);// Se convierte a numero( Porque lo que devuelve prompt es un string)
+
+            if(numero >= 0){// Se comprueba de que es positivo
             
-            // Se comprueba las condiciones
-            if(n1 > 0 && n2 > 0){ // Si las variables estan llenas
-                if(n1 > n2){ // Si es menor
-                    alert(n1 + " es mayor que " + n2); //
-                    // alert(n1, " es mayor que ", n2); // La funcion alerta solo acpeta un parametro por lo que es mejor concatenar que separar por comas los datos
-                }else if(n1 < n2){ // Si es mayor
-                    alert(n1 + " es menor que " + n2);
-                }else{ // Si son iguales
-                    alert("Los numeros que ingresastes son iguales.");
-                }
-            }else{ // si n1 y n2 son menores que 0
-                if(n1 == 0 ||  n2 == 0){ // Si son iguales a 0
-                    alert("Algunos valores ingresados son 0...");
-                }
-
-                if(n1 < 0 || n2 < 0){ // Si son negativos, menores que 0
-                    alert("Algunos datos ingresados son menores que 0... Osea negativos.");
-                }
+                suma += numero;// Se efectua la suma
+                contador ++;// y se itera el contador
+                
+                // Con el contador y la suma total se ira sacando la media, dividiendo entre contador el total de valores sumados
+                alert("La media hasta ahora es: " + (suma / contador) + "\nLa sumatoria total va en: " + suma + "\n Se han sumado " + contador + " numeros hasta ahora...");
+            }else{// en caso de que numero no sea mayor que 0 (osea negarivo)
+                break;// Se rompera el ciclo
             }
-        }
-
-    }else{ // Si son cadenas vacias (variables sin valor)
-        alert("Por favor digita los datos que se piden.");
+        } 
+    }else{//en caso de que el numero este vacio
+        alert("El valor digitado esta vacio, intentalo de nuevo.");// Se muestra una alerta
     }
 
-}while((n1 == '' || n2 == '') || isNaN(n1) && isNaN(n2) || (n1 <= 0 || n2 <= 0));// Mientras los datos recibidos no sean numeros o una cadena vacia, este bucle se repetira
+}while(numero >= 0 || numero == '');
 
-// Nota: Se comprueban todas las posibilidades y se da resultado segun sea el caso
+// Luego de terminar la operacion: 
+if(suma > 0 && contador > 0 ){
+    
+    console.log("La suma total de los numeros dio: " + suma + ", la media total dio: " + (suma / contador) + ", la cantidad de numeros sumados fue: " + contador);
+
+}else{
+    console.log("La suma no se completo exitosamente o fue cancelada.");
+}
