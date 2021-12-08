@@ -1,7 +1,9 @@
 /*
     Bloque 1 de ejersicios 
 
-    - Programa que muestre todos los divisores de un nuemro introducido en un prompt
+    - Hacer un programa que diga si un numero es par o impar
+        1. Ventana prompt
+        2. comprobar si un numero es valido
 */
 
 'use strict'
@@ -19,15 +21,18 @@ do{
         
         if(numero < 0){
             alert("Ese numero es negativo!!");
+        }else if(numero == 0){
+            alert("El numero no puede ser 0!!");
         }else{
            numero = parseInt(numero);
         }
     }
+
 }while(isNaN(numero) || numero <= 0);
 
-// Un numero es divisor de otro, es aquel que al dividirse entre el numero en cuestion su residuo da 0.
-for (let i = 1; i <= numero; i++){
-    if(numero % i == 0){// De esta forma filtramos a los numeros que son divisibles entre la variable "numero"
-        console.log("El numero: " + i + " es divisible entre " + numero);// Hacemos un console.log para la salida
-    }
+// Un numero es par cuando su reciduo al dividirlo entre 2 es 0, es impar en el caso contrario
+if(numero % 2 == 0){// Numero par
+    console.log("El numero " + numero + " es par!!");
+}else{// Numero impar
+    console.log("El numero " + numero + " es impar!!");
 }
