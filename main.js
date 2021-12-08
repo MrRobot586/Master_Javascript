@@ -2,39 +2,24 @@
     Bloque 1 de ejersicios 
 
     - Mostrar tabla de multiplicar del numero ingresado por el usuario
+        + Hacer lo mismo para todas las tablas de multiplicar
 */
 
 'use strict'
 
-var numero = 0;
+/* Anidando 2 bucles, recorremos primero 1 y en esa iteracion se recorre el que esta dentro de esta forma 
+imprimimos las tablas de multiplicar, usando los iteradores para sacar los calculos.
 
-// Codigo reciclado del ejersicio anterior - para la logica al conseguir los datos
-do{
+ejemplo: el primer bucle pasa por 1 en esa iteracion el bucle de adentro imprime la tabla del uno usando el contador
+del bucle anterior para multiplicarlo por el suyo.
 
-    numero = prompt("Digite un numero: ")
+*/
+for(let i = 1; i <= 10; i ++){
+    document.write("<h2> La tabla del  " + i + " es: </h2> \n <ul>");
 
-    if(isNaN(numero)){
-        alert("Ese no es un numero!!");
-    }else{
-        
-        if(numero < 0){
-            alert("Ese numero es negativo!!");
-        }else if(numero == 0){
-            alert("El numero no puede ser 0!!");
-        }else{
-           numero = parseInt(numero);
-        }
+    for(let c = 1; c <= 10; c ++){
+        document.write("<li>" + i + " x " + c + " = " + (i * c) + " </li>");
     }
 
-}while(isNaN(numero) || numero <= 0);
-
-// Imprimimos una cabecera e incluimos los elementos de la tabla de multiplicar en una lista 
-document.write("<h2> La tabla del  " + numero + " es: </h2> \n <ul>");
-
-// Creamos la lista con un bucle y realizamos las operaciones - imprimiendo la tabal de multiplicar
-for(let i = 1; i <= 10; i ++){
-    document.write("<li>" + numero + " x " + i + " = " + (numero * i) + " </li>");
+    document.write("</ul>");
 }
-
-// Cerramos la lista
-document.write("</ul>");
