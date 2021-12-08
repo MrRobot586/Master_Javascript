@@ -1,9 +1,7 @@
 /*
     Bloque 1 de ejersicios 
 
-    - Hacer un programa que diga si un numero es par o impar
-        1. Ventana prompt
-        2. comprobar si un numero es valido
+    - Mostrar tabla de multiplicar del numero ingresado por el usuario
 */
 
 'use strict'
@@ -30,9 +28,13 @@ do{
 
 }while(isNaN(numero) || numero <= 0);
 
-// Un numero es par cuando su reciduo al dividirlo entre 2 es 0, es impar en el caso contrario
-if(numero % 2 == 0){// Numero par
-    console.log("El numero " + numero + " es par!!");
-}else{// Numero impar
-    console.log("El numero " + numero + " es impar!!");
+// Imprimimos una cabecera e incluimos los elementos de la tabla de multiplicar en una lista 
+document.write("<h2> La tabla del  " + numero + " es: </h2> \n <ul>");
+
+// Creamos la lista con un bucle y realizamos las operaciones - imprimiendo la tabal de multiplicar
+for(let i = 1; i <= 10; i ++){
+    document.write("<li>" + numero + " x " + i + " = " + (numero * i) + " </li>");
 }
+
+// Cerramos la lista
+document.write("</ul>");
