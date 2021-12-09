@@ -1,25 +1,68 @@
 /*
     Bloque 1 de ejersicios 
 
-    - Mostrar tabla de multiplicar del numero ingresado por el usuario
-        + Hacer lo mismo para todas las tablas de multiplicar
+    - hacer calculadora
+    - que verifique los numeros (si son  validos)
+    - que muestre en el body, en una alerta y en la consola el resultado
 */
 
 'use strict'
 
-/* Anidando 2 bucles, recorremos primero 1 y en esa iteracion se recorre el que esta dentro de esta forma 
-imprimimos las tablas de multiplicar, usando los iteradores para sacar los calculos.
+// Variables
+var opt = 0;
 
-ejemplo: el primer bucle pasa por 1 en esa iteracion el bucle de adentro imprime la tabla del uno usando el contador
-del bucle anterior para multiplicarlo por el suyo.
+var n1 = 0;
+var n2 = 0;
 
-*/
-for(let i = 1; i <= 10; i ++){
-    document.write("<h2> La tabla del  " + i + " es: </h2> \n <ul>");
+var resultado = 0;
 
-    for(let c = 1; c <= 10; c ++){
-        document.write("<li>" + i + " x " + c + " = " + (i * c) + " </li>");
+do{// Selector de opcion para la operacion | Dependiendo de la opcon que seleccione el usuario realiza la operacion correspondiente
+    opt = parseInt(prompt("¿Que operacion realizaras? \n - 1 Suma\n - 2 Resta\n - 3 Multiplicacion\n - 4 Divicion"));
+
+    if(opt == 0 || opt > 4 || isNaN(opt)){
+        alert("Opcion desconocida o invalida");
     }
+}while(opt == 0 || opt > 4 ||isNaN(opt));
 
-    document.write("</ul>");
+// COdigo reciclado* - Para seleccionar los operadores
+do{
+
+    n1 = prompt("Digite un numero: ",0);
+    n2 = prompt("Digite otro numero: ",0);
+
+    if(isNaN(n1) || isNaN(n2)){
+        alert("Esos no son numeros!!");
+    }else{
+        
+        if(n1 < 0 || n2 < 0){
+            alert("Los numeros son negativos!!");
+        }else{
+            n1 = parseInt(n1);
+            n2 = parseInt(n2);
+        }
+    }
+}while((isNaN(n1) || isNaN(n2)) || (n1 < 0 || n2 < 0));
+
+// Segun la opcion realiza la operacion y guarda el resultado en una variable
+switch(opt){
+    
+    case 1:// Suma
+        resultado = n1 + n2;
+        break;
+    
+    case 2:// Resta
+        resultado = n1 - n2;
+        break;
+    
+    case 3:// Multiplicacion
+        resultado = n1 * n2;
+        break;
+    
+    case 4:// Divicion
+        resultado = n1 / n2;
+        break;
 }
+
+// Escribe el resultado en el body
+document.write("<h3> La respuesta a tu opracion es: " + resultado +"</h3>");
+
