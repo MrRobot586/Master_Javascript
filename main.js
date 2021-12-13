@@ -1,49 +1,48 @@
 /*
-    Funciones | Parametros rest y spread
-    - Rest: Los parametros rest se definen con "..." delante del nombre del mismo
-      Estos pueden recibir, multiples valores y los almacenan en un array con el nombre del parametro.
-    - Spread: Se puede enviar un array como parametro spreed usando "..." antes del nombre del arrray que se enviara como parametro
-      Estos parametros, al contrario de los rest, se envian no se definen para recibirlos. Es decir, si una funcion recibe 3 parametros,
-      en vez de esos se puede enviar un array de 3 valores, como parametro spread
+    Funciones | Funciones anonimas y callbacks
+    - Es una funcion que no tiene nombre
+    - Se pueden enviar como parametros a otras funciones
+    - Se pueden definir y asignarseles a una variable
 */
 
 'use strict'
 
-// Parametros rest:
-
-function lista_de_frutas(fruta1,fruta2,...resto_de_las_frutas){// El parametro "resto_de_las_frutas" es un parametro rest
-    // Los parametros fruta1 y 2: Su valor se puede obtener facilmente si es que son espesificados
-    console.log("Fruta 1: " + fruta1);
-    console.log("Fruta 2: " + fruta2);
-
-    // Para los valores en el array generado por el parametro "resto_de_las_frutas", se pueden recorrer usando un for
-    for(let i = 0; i < resto_de_las_frutas.length; i++){// con el metodo ".lenght" se obtiene la longitud de un array o cadena de caracteres (ayuda para definir el final del bucle)
-        console.log("Fruta " + (i+3) + ":" + resto_de_las_frutas[i]);// Se imprime el parametro espesificando la posicion del array con el contador del bucle "i"
-        // Esto imprimira el valor de el valor almacenado en esa posicion de memoria en el array
-    }
-
-    // console.log(resto_de_las_frutas); // ASi se podria imprimir el array pero esto no daria cada uno de los valores 
+// Asi se define una funcion anonima (Incluso se pueden poner parametros, que es casi obligatrio)
+var pelicula = function (nombre){
+    return "la pelicula es: " + nombre;
 }
 
-// Invocacion de la funcion
-lista_de_frutas("Cambur","Piña","verga","vurga","Varga");
+/*
 
-console.log("***************************"); // Separador
+Una funcion anonima no tiene nombre, por tanto se le puede asignar a una variable para que esta sirva de referencia a ella.
+Sin embargo su verdadera funcionalidad esta en poder mandarlas como parametro a otras funciones y asi abstraer gran parte de la logica
+de un bloque de codigo en concreto.
 
-// Parametros spread:
+*/
 
-var frutas = ["Piña","Banana","Manzana"];// Este array contiene 3 frutas
+// Esta funcion, recibe 4 parametros y usa 2 de ellos como funciones, enviadoles el resultado de la suma de los primeros 2 parametros
+function sumame(n1, n2, mostrar, mostrar_body){
+    var suma = n1 + n2;
 
-function lista_de_frutas2(fruta1,fruta2,fruta3){// Esta funcion recibe 3 parametros
-    console.log("Fruta 1:" + fruta1);
-    console.log("Fruta 2:" +fruta2);
-    console.log("Fruta 3:" +fruta3);
+    // Aca se invocan las funciones que se pasaran como parametros con sus nombres respectivos
+    mostrar(suma);// Esto simplemente ejecutara la funcion
+    document.write(mostrar_body(suma));// Esto imprimira en el body el return de la funcion
+
+    return suma;
 }
 
-lista_de_frutas2(...frutas);// Si enviamos el array "frutas" como parametro spreed, cada valor de este se asignara a los parametros de la funcion consecuentemente (es decir, uno por uno desde el primero)
+// Invocacion de la funcion sumame:
+sumame(5, 5, function (suma){// Se indican los parametros n1 y n2, pero el siguiente parametro es una funcion anonima
+    // Esta se define con la palabra funcion, se le define un parametro ya que en su invocacion se le pasa uno
+    // y por ultimo entre llaves se encierra el codigo del bloque.
+    console.log("La suma dio un total de: ", suma);// Esto seria lo que se ejecuta dentro de esa funcion
+}, function (suma){// Aca se define el ultimo parametro (o funcion anonima, callback) - Las funciones usadas como parametros tambien se separan con comas
+    return ("<h3>El resultado de la suma es: " + suma + "</h3>");// Esto seria lo que se ejecuta.
+});// Ambas funciones son separadas por comas como parametros normales y estan dentro de los parentecis de la funcion "sumame"
 
-/* 
-La diferencia entre estos tipos de parametros, es que:
-    1. Los rest se definen en la funcion y los spread se envian al llamarla
-    2. Los rest reunen varios parametros en 1 array y los spread expanden un array en varios parametros definidos en la funcion
+/*
+Nota:
+    - Recordar cerrar las lineas con punto y coma
+    - Las variables dentro de la funcion sumame (o la principal) no se pueden usar dentro de las funciones enviadas como parametros, por eso se usan parametros para obtener los datos
+    - Realmente hacer una funcion anonima dentro de una variable no tiene sentido es mejor hacerlas para callbacks como en este caso
 */
