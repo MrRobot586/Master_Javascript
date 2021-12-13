@@ -1,31 +1,31 @@
 /*
-    Funciones | Funciones de flecha
-    - Son funciones de callback escritas de forma mas facil y rapida
+    Funciones | El ambito de las variables
+    - Cada variable compete al ambito en el que es definida
+    - Es decir, cada variable existira donde fue definida y por ende tambien dentro de las funciones que esten un nivel por debajo de ellas
 */
 
 'use strict'
+// Ejemplo: Estas variables esta definidas a nivel global
+var texto = "Hola mundo soy una variable global";
+var numero = 1;
 
-/*
+function hola_mundo(texto){// esta funcion esta definida a nivel global, el parametro que recibe es interno
 
-Una funcion de flecha es una funcion de callback, solo que escrita de una forma mas simple y facil.
-Es una manera mas entendible y rapida de definir una funcion callback, o una funcion anonima.
+    var variable_interna = "Esto no se puede usar fuera de esta funcion";// Esta variable esta definida a nivel global de la funcion, es decir, dentro de la funcion
 
-*/
+    console.log(texto);// Se puede usar los parametros definidos, solo internamente
 
-// Codigo reciclado del ejersicio anterior
-function sumame(n1, n2, mostrar, mostrar_body){
-    var suma = n1 + n2;
+    console.log(numero);// Se puede hacer uso de variables externas, que esten definidas a un nivel mas alto de la funcion
 
-    mostrar(suma);
-    document.write(mostrar_body(suma));
+    console.log(variable_interna);// y por supuesto de las que estan dentro tambien se puede hacer uso
 
-    return suma;
 }
 
-sumame(5, 5,(suma) =>{// Se quita la palabra funcion al principio de los parentecis, para reemplazarla por una flecha al final de estos
-    console.log("La suma dio un total de: ", suma);
-}, suma =>{// Tambien se puede poner el parametro seguido de la flecha sin mas... Asi de simple
-    return ("<h3>El resultado de la suma es: " + suma + "</h3>");
-});
+console.log(variable_interna);// Sin embargo, las variables definidas dentro de la funcion no son accesibles desde fuera
 
-// Nota: Si la funcion de callback tiene mas de un parametro, si deben usarse los paretecis
+// Prueba de la funcion
+hola_mundo(texto);
+
+for(let i = 0; i < 10; i++){// Lo mismo para otras funciones, como la del bucle for
+    console.log(i + ".");// La variable i solo existe dentro del bucle porque fue definida dentro del mismo
+}
