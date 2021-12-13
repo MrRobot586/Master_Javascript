@@ -1,31 +1,48 @@
 /*
-    Funciones | El ambito de las variables
-    - Cada variable compete al ambito en el que es definida
-    - Es decir, cada variable existira donde fue definida y por ende tambien dentro de las funciones que esten un nivel por debajo de ellas
+    Funciones | Metodos para transformar textos
+    - Las variables initernamente se interpretan como objetos por lo que tienen metodos para manejar su contenido
+    - Existen muchos metodos para trasformar cadenas de texto y variables
+    - Para usar un metodo se usa el nombre de la variable (u objeto) seguido de un punto y el nombre del metodo
 */
 
 'use strict'
-// Ejemplo: Estas variables esta definidas a nivel global
-var texto = "Hola mundo soy una variable global";
-var numero = 1;
 
-function hola_mundo(texto){// esta funcion esta definida a nivel global, el parametro que recibe es interno
+var numero = 586;
+var texto = "Texto de relleno";
+var texto2 = "Texto de relleno 2";
 
-    var variable_interna = "Esto no se puede usar fuera de esta funcion";// Esta variable esta definida a nivel global de la funcion, es decir, dentro de la funcion
+/*
 
-    console.log(texto);// Se puede usar los parametros definidos, solo internamente
+Metodos para manejo de texto:
+    - tostring(): Convierte la variable en un string
+    - touppercase(): Convierte un texto en mayusculas
+    - tolowercase(): Convierte un texto en minusculas
+Otros metodos:
+    - lenght: En este caso no se usa los parentecis, pero sigue siendo un metodo. Devuelve la longitud de un string o del contenido de una variable
+    - concat(): Concatenar texto a una variable, enviadolo como parametro. 
+*/
 
-    console.log(numero);// Se puede hacer uso de variables externas, que esten definidas a un nivel mas alto de la funcion
+// Metodos para manejo de texto
+var dato = numero.toString();
+    dato = texto.toUpperCase();
+    dato = texto2.toLowerCase();
 
-    console.log(variable_interna);// y por supuesto de las que estan dentro tambien se puede hacer uso
+console.log(dato);
 
-}
+// Metodo leght
+var nombre = "Diego Oropeza";
 
-console.log(variable_interna);// Sin embargo, las variables definidas dentro de la funcion no son accesibles desde fuera
+console.log(nombre.length);
 
-// Prueba de la funcion
-hola_mundo(texto);
+// Metodo concat()
+var finaltext = texto.concat(", otro texto de relleno...");
 
-for(let i = 0; i < 10; i++){// Lo mismo para otras funciones, como la del bucle for
-    console.log(i + ".");// La variable i solo existe dentro del bucle porque fue definida dentro del mismo
-}
+console.log(finaltext);
+
+/*
+
+Nota: Los metodos no se aplican a las variables, es decir, si usas un metodo en una variable por ejemplo para convertir su contenido a mayusculas
+entonces, esa instancia sear en mayuscula, sin embargo, no cambiara el valor de la variable. Para cambiar el valor, lo recomendable es redefinir el valor de la variable
+por el valor que da como resultado el uso del metodo
+
+*/
