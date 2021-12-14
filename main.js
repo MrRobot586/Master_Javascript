@@ -1,30 +1,26 @@
 /*
-    Funciones | Metodos para cortar textos
-    - Mas metodos para cortar textos y transformarlos
+    Funciones | Plantillas de texto
+    - Utilizando comillas invertidas (``) Se pueden crear plantillas de texto
+    - Utilizando ${nombre de la variable} se pueden interpolar (poner el valor) variables en una plantilla de texto
+    - De forma que estas plantillas se pueden usar para crear formatos de html en javascript que luego se pueden imprimir en el body
 */
 
 'use strict'
 
-var texto = "Este es un texto random";
-var texto2 = "      Aca continua el texto random, otra vez colocamos la palabra random.     ";
+// Pedimos datos al usuario para llenar variables
+var nombre = prompt("Indica tu nombre: ");
+var apellido = prompt("Indica tu apellido: ");
 
-// Reemplazar una palabra por otra dentro de un string | Metodo replace("Palabra a reemplazar","palabra nueva")
-var nuevotexto = texto.replace("Este", "aquel");
-console.log(nuevotexto);
+// Creamos una plantilla de texto
+var texto = `
 
-// Cortar un string | Metodo slice(Posicion en la cual se terminara de cortar), se corta desde el inicio del string hasta donde se indique como primer parametro
-nuevotexto = texto.slice(4);
-console.log(nuevotexto);
+<h1>Datos ingresados:</h1>
+    <ul>
+    <li>Nombre: ${nombre}</li>
+    <li>Apellido: ${apellido}</li>
+    </ul>
+`;
 
-// Cortar un trozo de un string | Se indican como parametros el inicio y el final del string que se cortara, lo que este fuera de esos limites se elimina del strig resultante
-nuevotexto = texto.slice(0,4);
-console.log(nuevotexto);
+// Notas: Todos los caracteres son tomados en cuenta dentro de las comillas invertidas, incluso los espacios
 
-// Separar un string | Ejemplo: Si una oracion tiene varias palabras que estan separadas por espacios, o una lista esta separada por comas. Se puede usar el metodo split("Separador") para dividir cada una de las palabras en un array de strings
-nuevotexto = texto.split(" ");// Este metodo toma la variable texto y separa cada una de las palabras que existan en la variable y que esten separadas por un espacio " "
-console.log(nuevotexto);
-
-// Quitar los espacios adelante y atras de un string | Si un string tiene espacios adelante o atras con el metodo trim() se pueden eliminar facilmente
-nuevotexto = texto2.trim();// La variable texto2 tiene espacios adelante y atras, al hacer la conversion se quitan
-console.log(nuevotexto);
-
+document.write(texto);
