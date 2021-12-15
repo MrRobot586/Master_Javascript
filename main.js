@@ -1,26 +1,22 @@
 /*
-    Funciones | Plantillas de texto
-    - Utilizando comillas invertidas (``) Se pueden crear plantillas de texto
-    - Utilizando ${nombre de la variable} se pueden interpolar (poner el valor) variables en una plantilla de texto
-    - De forma que estas plantillas se pueden usar para crear formatos de html en javascript que luego se pueden imprimir en el body
+    Arrays - Arreglos
+    - Conjunto de valores 
 */
 
 'use strict'
 
-// Pedimos datos al usuario para llenar variables
-var nombre = prompt("Indica tu nombre: ");
-var apellido = prompt("Indica tu apellido: ");
+var variable = "Dato";// Esto es una variable
 
-// Creamos una plantilla de texto
-var texto = `
+// Esto es un array: Se definen de 2 formas
+// En un array se pueden poner muchos datos de distintos tipos: Como en este caso hay un booleano y un numero, ademas de varios arrays
+var array = ["Dato1","Dato2","Dato3",true,52];
+var arreglo = new Array("Dato1","Dato2","Dato3");
 
-<h1>Datos ingresados:</h1>
-    <ul>
-    <li>Nombre: ${nombre}</li>
-    <li>Apellido: ${apellido}</li>
-    </ul>
-`;
+// Se pueden imprimir en consola los arrays de esta forma
+console.log(array);
+console.log(arreglo);
 
-// Notas: Todos los caracteres son tomados en cuenta dentro de las comillas invertidas, incluso los espacios
+// Y para acceder a a una posicion en concreto se hace con los corchetes [numero de indice] - Recuerda que los indices se numeran desde 0 hasta n
+console.log(arreglo[1]);
+console.log(array[1]);
 
-document.write(texto);
