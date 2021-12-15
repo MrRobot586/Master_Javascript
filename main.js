@@ -1,22 +1,37 @@
 /*
-    Arrays - Arreglos
-    - Conjunto de valores 
+    Arrays - Arreglos | Tecnicas avanzadas
+     
 */
 
 'use strict'
 
-var variable = "Dato";// Esto es una variable
-
-// Esto es un array: Se definen de 2 formas
-// En un array se pueden poner muchos datos de distintos tipos: Como en este caso hay un booleano y un numero, ademas de varios arrays
 var array = ["Dato1","Dato2","Dato3",true,52];
-var arreglo = new Array("Dato1","Dato2","Dato3");
 
-// Se pueden imprimir en consola los arrays de esta forma
-console.log(array);
-console.log(arreglo);
+// Ver cual es la longitud de un array
+console.log(array.length);// Muestra cuantos elementos hay en un array
 
-// Y para acceder a a una posicion en concreto se hace con los corchetes [numero de indice] - Recuerda que los indices se numeran desde 0 hasta n
-console.log(arreglo[1]);
-console.log(array[1]);
+// Mostrar el valor de una posicion en un erray
+console.log(array[0]); // Muestra lo que hay en la primera posicion
 
+// Mostrar todos los elementos de un array
+// Forma 1: Imprimiendo directamente en el body con un for
+document.write("<h3>Elementos de un array 1: </h3>");
+document.write("<lu>");
+
+for(let i = 0; i < array.length; i++){
+    document.write("<li>"+ array[i] +"</li>");
+}
+
+document.write("</lu>");
+
+// Forma 2: Utilizando una plantilla de texto con un for
+document.write("<h3>Elementos de un array 2: </h3>");// Texto para adornar | Y diferenciar
+var lista = `<lu>\n`;// Se le añade un UL para crear la lista al principio de la plantilla
+
+for(let i = 0; i < array.length; i++){// Con un for se va iterando en cada uno de los elementos del array
+    lista += `\n<li>${array[i]}</li>`;// Se le concatena la informacion de los elementos dentro de un LI cada uno
+}
+
+lista += `\n</lu>`;// Por ultimo se cierra la lista
+
+document.write(lista);// Se imprime la variable que contiene la plantilla
