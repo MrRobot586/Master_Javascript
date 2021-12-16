@@ -1,33 +1,31 @@
 /*
-    Arrays - Arreglos | Recorrer arrays con for y foreach
-    - Con el metodo for each se pueden recorrer arreglos de forma mas facil y con menos codigo
-    - Funcionan con un callback, que puede definirse con una funcion flecha o una funcion anonima
+    Arrays - Arreglos | Arrays multidimencionales
+    - Un arreglo multidimencional es aquel que contiene 2 o mas arreglos dentro
+    - Es decir, dentro de un indice se encuentra un arreglo y asi consecutivamente
 */
 
 'use strict'
 
-// Array de prueba
+// Arrays de prueba 
 var lenguajes2021 = ["C++","C#","JS","Go"];
+var librerias2021 = ["Angular","Nodejs", "React"];
 
-// Titulo para la lista
-document.write("<h3>Lenguajes para el 2021:</h3>");
+// Asi se definiria un arreglo bidimencional, pero pueden ponerse mas de 2 arreglos dentro del mismo
+var programacion2021 = [lenguajes2021,librerias2021];
 
-/*
+// Asi se mostraria por consola un array multidimencional
+//console.log(programacion2021);
 
-Con el metodo foreach se recorre el array haciendo uso de una funcion de flecha
-en la cual se indicara que hacer con los datos del array, en este caso imprimir el indice y el contenido de este en el body
+// Asi se accede a un arreglo multidimencional - en el indice [0] se encutra el arreglo "lenguajes2021" y en el indice [1] de ese arreglo esta el dato "C#"
+//console.log(programacion2021[0][1]);
 
-*/
+// Asi se puede recorrer un arreglo multidimencional con el metodo foreach
+programacion2021.forEach((elemento,index)=>{// Primero se recorre la primera dimencion
+    console.log(index, "-----");// Se imprime el index 
 
-// El metodo se aplica sobre la variable que contiene el array
-lenguajes2021.forEach((elemeto, index, data)=>{// En un callback, definido con una funcion de flecha se definen 3 parametros de los cuales solo "elemento" es obligatorio, index y data son opcionales
-                    // Elemento es en donde se almacena el contenido del indice que se recorre, index es donde se almacena el indice en el que va iterando y data es el array como tal 
-    document.write(index + " - " + elemeto + "<br>");// Se escribe en el body, el indice del array y el contenido de tal indice
-    // console.log(data); // Se escribe por consola el array completo en cada iteracion (Es solo para demostrar)
+    elemento.forEach((i)=>{// y se recorre el array que esta en el elemento en cuestion en el cual se esta iterando
+        console.log(i);// Se imprime
+    });
 });
 
-/*
-
-Nota: Los parametros de la funcion flecha pueden tener cualquier nombre, su definicion es lo que importa
-
-*/
+/* Nota: Con el foreach, se recorre el array principal y dentro se recorren los que estan dentro de ese array. */
