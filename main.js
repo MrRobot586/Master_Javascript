@@ -1,8 +1,6 @@
 /*
-    Arrays - Arreglos | Ordenar un array
-    - Metodos para ordenar un array
-    - Sort: Ordena de mayor a menor o de forma alfabetica un array
-    - Reverse: Invierte el orden de un array
+    Arrays - Arreglos | Recorrer arrays con el for in
+    - Con el metodo for in se puede recorrer un array de forma mas facil, es casi igual que foreach con la excepcion de que es una funcion
 */
 
 'use strict'
@@ -11,16 +9,7 @@
 var numeros = ["5","8","6","4"];
 var letras = ["C","G","H","A"];
 
-// Utilizando el metodo sort() - Se ordenan los arrays, claro este metodo si afecta al array directamente. No es necesario almacenar su resultado en una variable
-numeros.sort();
-letras.sort();
-
-// Salida de prueba
-console.log(numeros);
-console.log(letras);
-
-// Con el metodo reverse se invierte el orden original del array
-numeros.reverse();
-
-// Salida de prueba
-console.log(numeros);
+// Se define como un for normal, pero dentro se define una variable que se usara de iterador seguido de la palabra in y el array a recorrer
+for(let letra in letras){// Se define letra como iterador y letras es el array que se usara
+    console.log(letras[letra]);// Para usar el valor del indice, se usa la variable que se declaro en la definicion de for, en este caso letra
+}
