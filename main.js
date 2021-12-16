@@ -1,37 +1,33 @@
 /*
-    Arrays - Arreglos | Tecnicas avanzadas
-     
+    Arrays - Arreglos | Recorrer arrays con for y foreach
+    - Con el metodo for each se pueden recorrer arreglos de forma mas facil y con menos codigo
+    - Funcionan con un callback, que puede definirse con una funcion flecha o una funcion anonima
 */
 
 'use strict'
 
-var array = ["Dato1","Dato2","Dato3",true,52];
+// Array de prueba
+var lenguajes2021 = ["C++","C#","JS","Go"];
 
-// Ver cual es la longitud de un array
-console.log(array.length);// Muestra cuantos elementos hay en un array
+// Titulo para la lista
+document.write("<h3>Lenguajes para el 2021:</h3>");
 
-// Mostrar el valor de una posicion en un erray
-console.log(array[0]); // Muestra lo que hay en la primera posicion
+/*
 
-// Mostrar todos los elementos de un array
-// Forma 1: Imprimiendo directamente en el body con un for
-document.write("<h3>Elementos de un array 1: </h3>");
-document.write("<lu>");
+Con el metodo foreach se recorre el array haciendo uso de una funcion de flecha
+en la cual se indicara que hacer con los datos del array, en este caso imprimir el indice y el contenido de este en el body
 
-for(let i = 0; i < array.length; i++){
-    document.write("<li>"+ array[i] +"</li>");
-}
+*/
 
-document.write("</lu>");
+// El metodo se aplica sobre la variable que contiene el array
+lenguajes2021.forEach((elemeto, index, data)=>{// En un callback, definido con una funcion de flecha se definen 3 parametros de los cuales solo "elemento" es obligatorio, index y data son opcionales
+                    // Elemento es en donde se almacena el contenido del indice que se recorre, index es donde se almacena el indice en el que va iterando y data es el array como tal 
+    document.write(index + " - " + elemeto + "<br>");// Se escribe en el body, el indice del array y el contenido de tal indice
+    // console.log(data); // Se escribe por consola el array completo en cada iteracion (Es solo para demostrar)
+});
 
-// Forma 2: Utilizando una plantilla de texto con un for
-document.write("<h3>Elementos de un array 2: </h3>");// Texto para adornar | Y diferenciar
-var lista = `<lu>\n`;// Se le añade un UL para crear la lista al principio de la plantilla
+/*
 
-for(let i = 0; i < array.length; i++){// Con un for se va iterando en cada uno de los elementos del array
-    lista += `\n<li>${array[i]}</li>`;// Se le concatena la informacion de los elementos dentro de un LI cada uno
-}
+Nota: Los parametros de la funcion flecha pueden tener cualquier nombre, su definicion es lo que importa
 
-lista += `\n</lu>`;// Por ultimo se cierra la lista
-
-document.write(lista);// Se imprime la variable que contiene la plantilla
+*/
