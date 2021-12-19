@@ -1,101 +1,34 @@
 /*
-    Arrays - Arreglos | Ejersicio del bloque 2
-    - Pida 6 numeros por pantalla y los almacene en un array (x) - Pedi mas de los que eran xd
-    - Mostrar el array entero en el cuerpo de la pagina y en la consola | Todos sus elementos (x)
-    - Ordenarlo y mostrarlo (x)
-    - Invertir su orden y mostrarlo (x)
-    - Mostrar cuantos elementos tiene (x)
-    - Hacer una busqueda de un valor introducido por el usuario (Que diga si se encuentra y su indice) (x)
+    Indroduccion al DOM - Es el conjunto de etiquetas que confirman la pagina web
+    - Es un objeto cuya funcion es proporcionar facil acceso a los elementos de la web para modificarlos mediante sus propiedades
+    - Para acceder a algun elemento se usa el objeto o funcion "Document" seguido de un metodo para seleccionar un elemento en concreto
+    - Los metodos de seleccion pueden seleccionar un elemento por ID, clase o incluso un quieryselector (que son los que se usan en CSS)
+    - Para usar y cambiar los valores de un elemento del DOM es necesario, obtenerlo para ello se le asigna a una variable mediante el objeto document y un metodo
 */
 
 'use strict'
 
-// Easy B)
+// Para seleccionar u obtener un elemento del HTML se puede igualar una variable al objeto "document.propiedad"
+var h = document.getElementById("head");// En este caso obtenemos un elemento por ID que seria HEAD - Document.GetElementByID("Id del elemento")
 
-var elementos = [];// Recordar que se pueden definir arrays o variables vacios
+// De esta forma podremos ver que tiene dentro la variable H - Contiene un objeto que representa el elemento en el HTML
+console.log(h);
 
-var elemento_by_user;
+// A partir de la asignacion la variable se convierte en un objeto, con distintos metodos para modificar sus atributos
+h.innerHTML = "Master en Javascript - by: VictorRoblesweb.es";// Utilizando la el nombre de la variable seguido de un metodo se pueden editar las propiedades del objeto (osea el elemento)
+// Existen distintos metodos, el metodo innerHTML sirve para editar el HTML dentro de dicho elemento (en este caso dentro de p)
 
-// Pedir los numeros | Con logica para elegir a los que son y no son numeros
-while(elemento_by_user = prompt("Es hora de crear un array\nPreciona cancelar para terminar o aceptar sin escribir nada...\nDigita un numero para añadir al array: ")){
-    
-    if(isNaN(elemento_by_user)){
-        alert("Ingresa solo numeros, no letras!!");
-    }else{
-        elemento_by_user = parseInt(elemento_by_user); 
-        elementos.push(elemento_by_user);
-    }
-    
-}
+// Con el metodo style se pueden modificar los estilos del elemento seleccionado, aplicando la propiedad deseada tambien como un sub metodo
+h.style.background = "tomato";
+h.style.padding = "15px";
+h.style.color = "white";
+h.style.textAlign = "center";
 
-// Funcion para crear una lista con los elementos
-function crearlista(lista_de_elemntos){
-    
-    var lista;
-    
-    lista = `<ul>`;
+// Tambien se pueden seleccionar elementos con el metodo quierySelector("selector") - Con este se seleccionan los elementos como en CSS (Si es una clase con ".nombre" y si es id con "#id", lo mismo aplica para todo)
+var p = document.querySelector("#parrafo");// En este caso seleccionamos u obtenemos el elemento del DOM cuyo ID es parrafo (#parrafo)
+p.innerHTML = "El D.O.M en JS: Document Object Model, sirve para modelar los diferentes elementos de una web.";// Y editamos el HTML dentro del mismo - El metodo innerHTML obtiene todo el contenido de una etiqueta
 
-    for(let element in lista_de_elemntos){
-
-        lista += `<li>[${element}] - ${lista_de_elemntos[element]} </li>`;
-        
-    }
-
-    lista += `</ul>`;
-
-    return lista;
-}
-
-if(elementos.length > 0){// Si se creo el array
-
-    // Mostrar lista en el body
-    document.write("<h2>Lista de elmentos creada por el usuario | Contiene " + elementos.length + " elementos</h2>");
-    
-    document.write("<h3>Lista en el orden en el que fue creada</h3>");
-
-    document.write(crearlista(elementos));
-
-    // Mostrar la lista por consola
-    elementos.forEach((element, index) => {
-        console.log("["+index+"] - "+element+"");
-    });
-    
-    // Para ordenar una lista de numeros con sort es necesario pasarle una funcion como esta:
-    elementos.sort((a,b) => a - b);
-    
-    // Mostrar lista ordenada
-    document.write("<h3>Lista ordenada de menor a mayor</h3>");
-    
-    document.write(crearlista(elementos));
-
-    //Mostrar lista invertida
-    document.write("<h3>Lista en el orden inverso</h3>");
-
-    elementos.reverse();
-
-    document.write(crearlista(elementos));
-
-    // Revertimos el array otra vez
-    elementos.reverse();
-
-    // Busqueda
-    let busqueda;
-    
-    if(confirm("Deseas buscar un elemento en el array que generaste?")){
-        do{
-            busqueda = prompt("Que numero deseas buscar en el array o lista?", 0);
-    
-            if(isNaN(busqueda)){
-                alert("Solo puedes buscar numeros, la lista esta compuesta unicamente por numeros...");
-            }else{
-                busqueda = parseInt(busqueda);
-    
-                if(elementos.some(elemento => elemento == busqueda)){
-                    console.log("El elemento si existe en el array, se encuentra en el indice " + elementos.findIndex(n => n == busqueda));
-                }else{
-                    console.log("El elemento no existe...");
-                }
-            }
-        }while(isNaN(busqueda));
-    }
+// Ahora usando una funcion, se puede recibir un objeto (el elemento) y cambiar sus estylos con algun otro valor obtenido como parametro
+function cambiarcolor(elemento, color){
+    elemento.style.background = color;// En este caso se le cambia el color de fondo
 }
