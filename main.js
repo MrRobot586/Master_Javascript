@@ -1,43 +1,101 @@
 /*
-    Arrays - Arreglos | Buscar en un array 
-    - 
+    Arrays - Arreglos | Ejersicio del bloque 2
+    - Pida 6 numeros por pantalla y los almacene en un array (x) - Pedi mas de los que eran xd
+    - Mostrar el array entero en el cuerpo de la pagina y en la consola | Todos sus elementos (x)
+    - Ordenarlo y mostrarlo (x)
+    - Invertir su orden y mostrarlo (x)
+    - Mostrar cuantos elementos tiene (x)
+    - Hacer una busqueda de un valor introducido por el usuario (Que diga si se encuentra y su indice) (x)
 */
 
 'use strict'
 
-// Array de prueba
-var numeros = ["5","8","6","4"];
-var precios = [80,90,10,20,40];
+// Easy B)
 
-var Busqueda = "";
+var elementos = [];// Recordar que se pueden definir arrays o variables vacios
 
-// Busqueda usando el metodo find: Usando una funcion anonima (callback), enviando como parametro numero y comparandolo con el valor que buscamos, podemos comprobar si este existe o no.
-Busqueda = numeros.find(function(numero){
-    return numero == "5";// Devuelve undefined si el valor no existe y devuelve el valor en cuestion si es que lo encuentra
-});
+var elemento_by_user;
 
-// Salida para la prueba
-console.log(Busqueda);
+// Pedir los numeros | Con logica para elegir a los que son y no son numeros
+while(elemento_by_user = prompt("Es hora de crear un array\nPreciona cancelar para terminar o aceptar sin escribir nada...\nDigita un numero para añadir al array: ")){
+    
+    if(isNaN(elemento_by_user)){
+        alert("Ingresa solo numeros, no letras!!");
+    }else{
+        elemento_by_user = parseInt(elemento_by_user); 
+        elementos.push(elemento_by_user);
+    }
+    
+}
 
-// Reducir el codigo usando una funcion de flecha: Se reduce el codigo a una sola linea, omitiendo los parentecis de los parametros, las llaves que encierran el codigo de la funcion y el return de la funcion. Colocando como unico codigo dentro de la funcion la comparativa entre el parametro y el valor buscado
-Busqueda = numeros.find(numero => numero == "5");
+// Funcion para crear una lista con los elementos
+function crearlista(lista_de_elemntos){
+    
+    var lista;
+    
+    lista = `<ul>`;
 
-// Salida de prueba
-console.log(Busqueda);
+    for(let element in lista_de_elemntos){
 
-// Para encontrar el indice de un array se usa el metodo findIndex: Usando exactamente la misma formula del anterior metodo find.
-Busqueda = numeros.findIndex(numero => numero == "5");// Recordar que la comparativa debe ser con el mismo tipo de dato!!, la funcion devolvera -1 si no encuentra el valor
+        lista += `<li>[${element}] - ${lista_de_elemntos[element]} </li>`;
+        
+    }
 
-// Salida de prueba
-console.log("Busqueda: ", Busqueda);
+    lista += `</ul>`;
 
-// Para comprobar si existe cierto valor en un array: Se usa el metodo some, que compara y devuelve true o false en caso de que encuentre o no el valor dado.
-Busqueda = precios.some(precio => precio >= 20);// Este metodo solo devuelve true o false.
+    return lista;
+}
 
-// Salida de prueba
-console.log(Busqueda);
+if(elementos.length > 0){// Si se creo el array
 
-/*
-Notas:
-    - La diferencia entre esots metodos de busqueda y los vistos en la clase de funciones, es que aquellos son para strings y estos son para arrays.
-*/
+    // Mostrar lista en el body
+    document.write("<h2>Lista de elmentos creada por el usuario | Contiene " + elementos.length + " elementos</h2>");
+    
+    document.write("<h3>Lista en el orden en el que fue creada</h3>");
+
+    document.write(crearlista(elementos));
+
+    // Mostrar la lista por consola
+    elementos.forEach((element, index) => {
+        console.log("["+index+"] - "+element+"");
+    });
+    
+    // Para ordenar una lista de numeros con sort es necesario pasarle una funcion como esta:
+    elementos.sort((a,b) => a - b);
+    
+    // Mostrar lista ordenada
+    document.write("<h3>Lista ordenada de menor a mayor</h3>");
+    
+    document.write(crearlista(elementos));
+
+    //Mostrar lista invertida
+    document.write("<h3>Lista en el orden inverso</h3>");
+
+    elementos.reverse();
+
+    document.write(crearlista(elementos));
+
+    // Revertimos el array otra vez
+    elementos.reverse();
+
+    // Busqueda
+    let busqueda;
+    
+    if(confirm("Deseas buscar un elemento en el array que generaste?")){
+        do{
+            busqueda = prompt("Que numero deseas buscar en el array o lista?", 0);
+    
+            if(isNaN(busqueda)){
+                alert("Solo puedes buscar numeros, la lista esta compuesta unicamente por numeros...");
+            }else{
+                busqueda = parseInt(busqueda);
+    
+                if(elementos.some(elemento => elemento == busqueda)){
+                    console.log("El elemento si existe en el array, se encuentra en el indice " + elementos.findIndex(n => n == busqueda));
+                }else{
+                    console.log("El elemento no existe...");
+                }
+            }
+        }while(isNaN(busqueda));
+    }
+}
