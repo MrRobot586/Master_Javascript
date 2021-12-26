@@ -1,31 +1,35 @@
 /*
-    DOM - Practicas: Repaso
-    - Seleccion de elementos
-    - DIferencias entre getelement y queryselector
+    BOM - Browser Object Model
+    - Elementos presentes en el navegador web, propiedades y caracteristicas. Mediante el BOM se pueden editar
 */
 
-// Se puen seleccionar elementos por clase, id, nombre de la etiqueta o mediate selectores css
-var rojo = document.getElementsByClassName("rojo");
+'use strict'
 
-// Utilizando el getelement por clase se pueden seleccionar todos los elementos con una clase
-// Esto tambien sirve con getelementbytagname
-for(let div in rojo){
-    // Se pueden modificar sus estilos etc...
-    if(rojo[div].className = "rojo"){// Se puede verificar si es un elemento de HTML
-        rojo[div].style.background = "tomato";// y editar sus propiedades css
-        rojo[div].style.color = "white";
-    }
-    // Por lo general, al seleccionar muchos elementos hay algunos que estan en el dom pero que no son visibles pero que no importa editarlos realmente
-    // Para saltarse estos inconvenientes es mejor verificar que el elemento seleccionado tiene la clase deseada o identificador
-}
+// Con el objeto window y a travez de sus metodos se pueden obtener las propiedades de la ventana actual
+var ventana_alto = window.innerHeight;// o el alto de la ventana actual
+var ventana_hancho = window.innerWidth;// Como por ejemplo el hancho
 
-//La diferencia entre getelement y queryselector es que getelement puede buscar todos los elementos de una clase o tag, mientras que quieryselector solo selecicona el primero que encuentre
+// Lo interesante de estos metodos es que siempre cambian en funcion de la altura y anchura de la ventana
+// Es decir, si la ventan es menos hancha entonces se vera reflejado en el valor que devuelva
+console.log("El tamaño de la ventana ahora es de: " + ventana_alto + " x " + ventana_hancho);
 
-/*
+// Meidainte el metodo location aplicado al objeto window se obtienen distintos parametros propios de URL de la web
+// Se obtienen datos como la URL del sitio, la IP y asi... En este caso se muestra el href del sitio (o url)
+console.log(window.location.href);
 
-Resumen:
-    - Se pueden obtener un elemento con el objeto document y los metodos: getelement y quieryselector
-    - Se puede modificar por completo un elemento lugo de obtenerlo
-    - Se pueden obtener distintos elementos de una misma clase u tag (o una misma gerarquia) con getelement
-    - y con quueryselector solo se selecciona 1 elemento (el primero)
-*/
+// Asi como tambien se pueden editar estas propiedades a traves de los propios metodos
+// window.location.href = "https://www.google.com";// Descomenta esta linea, cuando se ejecute se cambiara el href al del google y se redireccionara hasta esa pagina
+
+// Tambien se pueden abrir ventanas o tabs con el mismo objeto window
+window.open("https://www.youtube.com");// Con window.open se puede abrir una nueva tab o pesataña enviando como parametro una URL 
+
+window.open("https://www.youtube.com","","width=500,height=500");// y usando el mismo metodo pero enviando 3 parametros (una url, una cadena vacia y otra con las propiedades de la venta)
+// Se puede abrir una ventana nueva con las dimenciones que se coloquen como 3er parametro. En este caso se abre una ventan de hacho 500 y alto 500px
+
+//  Nota: Si se coloca el "https://"
+
+// Ahora con el objeto screen se puede obtener el hacho y alto de la pantalla como tal
+console.log(screen.width, screen.height);
+
+
+
