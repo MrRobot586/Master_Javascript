@@ -1,35 +1,60 @@
 /*
-    BOM - Browser Object Model
-    - Elementos presentes en el navegador web, propiedades y caracteristicas. Mediante el BOM se pueden editar
+    Eventos en JS - Un evento es algo que sucede en el navegador web y que puede ser capturado para realizar funciones en base a estos
+        - Existen distintos eventos que pueden suceder en una pagina y que pueden ser capturados
+        - Los eventos se pueden capturar de 2 formas
+            - Con atributos en HTML
+            - Con eventlistener en JS
 */
+
+// Eventos del raton
 
 'use strict'
 
-// Con el objeto window y a travez de sus metodos se pueden obtener las propiedades de la ventana actual
-var ventana_alto = window.innerHeight;// o el alto de la ventana actual
-var ventana_hancho = window.innerWidth;// Como por ejemplo el hancho
+// Evento de click: Al hacer click en el elemento
 
-// Lo interesante de estos metodos es que siempre cambian en funcion de la altura y anchura de la ventana
-// Es decir, si la ventan es menos hancha entonces se vera reflejado en el valor que devuelva
-console.log("El tamaño de la ventana ahora es de: " + ventana_alto + " x " + ventana_hancho);
+/* Forma 1: 
+    Capturar evento con atributo "onlick" en HTML. En la etiqueta button se le asigno un atributo onclick
+    y se le dio el valor de la funcion "click_boton", que muestra una alerta. De esta forma al darle click al
+    boton se ejcutara esta funcion.
+*/
+function click_boton(){// Funcion que se ejecuta tras el evento
+    alert("El boton ha funcionado!!! ");
+}
 
-// Meidainte el metodo location aplicado al objeto window se obtienen distintos parametros propios de URL de la web
-// Se obtienen datos como la URL del sitio, la IP y asi... En este caso se muestra el href del sitio (o url)
-console.log(window.location.href);
+/* Forma 2:
+    Capturar evento seleecionando el elemento deseado, en este caso por ID, añadiendo un eventlistener y dandole una funcion.
+    Este metodo es mas clean para programar y dejar todo en un mismo archivo JS
+*/
+var boton = document.getElementById("boton");// Capturar el elemento
 
-// Asi como tambien se pueden editar estas propiedades a traves de los propios metodos
-// window.location.href = "https://www.google.com";// Descomenta esta linea, cuando se ejecute se cambiara el href al del google y se redireccionara hasta esa pagina
+boton.addEventListener('click', ()=>{// Con el elemento, usando el metodo "addeventlistener" se puede añadir una funcion en caso de un evento espesifico
+/*
+    Se envian 2 parametros a este metodo:
+        - El primero es el nombre del evento a capturar
+        - el segundo es una funcion de callback (en este caso una de flecha) en la cual se espesifica lo que pasara tras el evento 
 
-// Tambien se pueden abrir ventanas o tabs con el mismo objeto window
-window.open("https://www.youtube.com");// Con window.open se puede abrir una nueva tab o pesataña enviando como parametro una URL 
+*/
+    // Codigo a ejecutar en el evento click
+    if(boton.style.background == "tomato"){// Un swithcher de colores. Simple.
+        boton.style.background = "teal";
+    }else{
+        boton.style.background = "tomato";
+    }
+});
 
-window.open("https://www.youtube.com","","width=500,height=500");// y usando el mismo metodo pero enviando 3 parametros (una url, una cadena vacia y otra con las propiedades de la venta)
-// Se puede abrir una ventana nueva con las dimenciones que se coloquen como 3er parametro. En este caso se abre una ventan de hacho 500 y alto 500px
+// Evento de mouseover: Al poner el mouse ensima del elemento
+boton.addEventListener('mouseover', function(){
+    boton.style.padding = "10px";
+});
 
-//  Nota: Si se coloca el "https://"
+// Evento de mouseout: Al quitar el mouse del elemento
+boton.addEventListener('mouseout', function(){
+    boton.style.padding = "2px";
+});
 
-// Ahora con el objeto screen se puede obtener el hacho y alto de la pantalla como tal
-console.log(screen.width, screen.height);
+/*
 
-
-
+Notas:
+    - Existen mas eventos, pero aca solo se destacan los importantes
+    
+*/
