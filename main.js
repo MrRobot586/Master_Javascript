@@ -1,60 +1,42 @@
 /*
-    Eventos en JS - Un evento es algo que sucede en el navegador web y que puede ser capturado para realizar funciones en base a estos
-        - Existen distintos eventos que pueden suceder en una pagina y que pueden ser capturados
-        - Los eventos se pueden capturar de 2 formas
-            - Con atributos en HTML
-            - Con eventlistener en JS
+    Eventos en JS
+
 */
 
-// Eventos del raton
+// Eventos del teclado y foco
 
 'use strict'
 
-// Evento de click: Al hacer click en el elemento
+// Obtener o seleccinar el elemento con el id campo_name
+var campo = document.getElementById("campo_name");
 
-/* Forma 1: 
-    Capturar evento con atributo "onlick" en HTML. En la etiqueta button se le asigno un atributo onclick
-    y se le dio el valor de la funcion "click_boton", que muestra una alerta. De esta forma al darle click al
-    boton se ejcutara esta funcion.
-*/
-function click_boton(){// Funcion que se ejecuta tras el evento
-    alert("El boton ha funcionado!!! ");
-}
-
-/* Forma 2:
-    Capturar evento seleecionando el elemento deseado, en este caso por ID, añadiendo un eventlistener y dandole una funcion.
-    Este metodo es mas clean para programar y dejar todo en un mismo archivo JS
-*/
-var boton = document.getElementById("boton");// Capturar el elemento
-
-boton.addEventListener('click', ()=>{// Con el elemento, usando el metodo "addeventlistener" se puede añadir una funcion en caso de un evento espesifico
-/*
-    Se envian 2 parametros a este metodo:
-        - El primero es el nombre del evento a capturar
-        - el segundo es una funcion de callback (en este caso una de flecha) en la cual se espesifica lo que pasara tras el evento 
-
-*/
-    // Codigo a ejecutar en el evento click
-    if(boton.style.background == "tomato"){// Un swithcher de colores. Simple.
-        boton.style.background = "teal";
-    }else{
-        boton.style.background = "tomato";
-    }
+// Evento Focus: Cuando se enfoca un elemento seleccionado, es decir, cuando le damos click y el navegador se enfoca en el
+campo.addEventListener('focus', () =>{
+    console.log("[focus] focus on!");
 });
 
-// Evento de mouseover: Al poner el mouse ensima del elemento
-boton.addEventListener('mouseover', function(){
-    boton.style.padding = "10px";
+// Evento Blur: Cuando el enfoque en el elemento ya no esta, es decir, cuando se deja de enfocar al elemento
+campo.addEventListener('blur', () =>{
+    console.log("[blur] focus of!");
 });
 
-// Evento de mouseout: Al quitar el mouse del elemento
-boton.addEventListener('mouseout', function(){
-    boton.style.padding = "2px";
+// Evento keydown: Sucede al precionar una tecla (tan pronto como se precione)
+campo.addEventListener('keydown', (event) =>{
+    console.log("[keydown] Pulsando una tecla! " + String.fromCharCode(event.keyCode));// Con el fragmento del final se puede imprimir el caracter de la tecla que preciono
+    // console.log("[keydown] Precionaste una tecla! " + event.key);// Se puede hacer lo mismo usando el metodo "key"
+    /*
+        Al colocar un parametro en la funcion de callback, se obtiene el evento como tal en el cual se almacenan datos 
+        que se pueden usar para analizar el evento y hacer funcionalidades en torno a eso. Lo devuelve en forma de objeto con metodos y propiedades.
+    */
 });
 
-/*
+// Evento keyup: Sucede al soltar una tecla (luego de precionarla logicamente, pero solo sucedera al soltarla)
+campo.addEventListener('keyup', (event) =>{
+    console.log("[keyup] Precionaste una tecla!");
+});
 
-Notas:
-    - Existen mas eventos, pero aca solo se destacan los importantes
-    
-*/
+// Evento keypress: Sucede al precionar y soltar una tecla en el mismo contexto.
+campo.addEventListener('keypress', (event) =>{
+    console.log("[keypress] Precionaste una tecla!");
+});
+
