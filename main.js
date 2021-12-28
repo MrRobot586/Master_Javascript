@@ -1,64 +1,67 @@
 /*
-    Timers en JS
+    Ejersicio completo DOM, Eventos y funciones
+        1. Formulario: nombre, apellidos y edad [x]
+        2. Boton para enviar el formulario: evento submit [x]
+        3. Mostrar datos por pantalla [x]
+        4. Boton que al darle click muestre los datos por pantalla [x]
 
 */
 
 'use strict'
 
-// NOta: Desde ahora todos los archivos JS se haran dentro de la funcionalidad para que se ejecute el JS cuando se carge el body
-window.addEventListener('load', () =>{
-
-    /*
-        Los timers son contadores que ayudan a repetir una accion cada determinado tiempo, hay 2 funciones para esto
-        Settimeout y setinterval, ambas funcionan igual pero una establece un tiempo antes de ejecutar una accion y una establece
-        un tiempo antes de repetir una accion. (una se ejecuta una unica vez y la otra en bucle)
-    */
-
-    setTimeout(() => {
+window.addEventListener('load', () =>{// Ejecucion del JS tras la carga de la pagina
+    
+    var form = document.getElementById("formulario");// Obtenemos el formulario HTML con el ID
+    
+    form.addEventListener('submit',(event) =>{// Añadimos un eventlistener y escuchamos el evento 'submit' | Se puede analizar este evento gracias al tipo de elemento
         /*
-            setTimeout: Esta funcion sirve para crear un retraso antes de ejecutar una funcion, una unica vez. 
-            En este caso crea un retraso de 3 segundos antes de ejecutar la funcion. Esta funcion recibe 2 parametros,
-            el primero una funcion de flecha o anonima como callback en donde se espesifica el codigo a ejecutar tras el retraso y 
-            el segundo es un numero entero que sera la cantidad de milisegundos que se retrasara dicha ejecucion. En este caso 3000 (3 segundos)
+            El parametro event: Almacena el evento como tal, este puede servir para crear funcionalidades en torno a los datos que contenga el objeto dentro de dicha variable
         */
-        console.log("Este mensaje se mostrara luego de 3 segundos...");
-    }, 3000);
+        event.preventDefault();// Este metodo, previene la carga de la pagina cuando se envie el formulario, esto aplicado al eventu submit
 
-    // Funcion para poder usar el mismo codigo varias veces*
-    function interval(){// Esta inica un intervalo y lo asgna a una variable para despues devolverla como valor, por lo que al ejecutarla se ejecutara dicho intervalo
+        var datos = [];// Creamos un array vacio para los datos que se recibiran del formulario
 
-        /*
-            setInterval: Sirve para crear un bucle que se repetira cada n milisegundos, recibe los mismos parametros que la anterior funcion
-            y funciona de la misima forma, excepto porque este se repite tras la ejecucion del codigo una y otra vez sin parar.
-        */
-        var time = setInterval(function (){// Se le puede asignar una funcion a una variable esto para despues poder interactuar con esa misma funcion
-            console.log("Este mensaje se va a repetir cada 1 segundos...");
-        }, 1000);
+        // Rellenamos dicho array con los 3 datos | Usando el metodo push para construir el array
+        datos.push(document.getElementById("nombre"));// Cabe destacar que se obtiene el elemento HTML como tal
+        datos.push(document.getElementById("apellido"));// No el valor, esto es para poder interactuar con sus diferentes atributos
+        datos.push(document.getElementById("edad"));// Como el valor y el nombre del campo en este caso, ya que se obtienen inputs desde el HTML
 
-        return time;
-    }
+        var datos_html = document.getElementById("datos_usr");// Obtenemos la seccion donde se colocaran los datos
 
-    var tiempo = interval();// Se ejecuta la funcion asignandola a una variable
+        // Creacion de titulo para la seccion de donde se mostraran los datos 
+        var h3 = document.createElement('h3');
+        h3.textContent = "Datos del usuario: ";
 
-    var stop = document.getElementById("stop");// Seleccion de el boton stop
+        datos_html.prepend(h3); // Colocamos el h3 por ensima, como hijo del la seccion
 
-    stop.addEventListener('click',()=>{// Añadimos un eventlistener para escuchar el evento click
-        clearInterval(tiempo);// Y le asignamos la funcion para eliminar el bucle que ya existe (setinterval)
-        // Al ser asignado a una variable, entonces con la funcion clearinterval() anulamos ese bucle o intervalo, claro enviado como parametro la variable que se uso para crearlo
+        // Un poco de logica en caso de que el formulario este vacio xd
+        if(document.getElementById('nombre').value == '' || document.getElementById('apellido').value == '' || document.getElementById('edad').value == ''){// Si alguno de los campos esta vacio
+            datos_html.append(document.createTextNode('[Vacio] - El formulario esta vacio o algun dato no esta lleno...'));// Mostrar este mensaje en vez de los datos..
+        }else{// Caso contrario | En caso de que si existan los datos
+            var lista = document.createElement('ul');// Creamos un elemento de lista desordenada
+        
+            for(let i in datos){// Usando un for in iteramos en el array de los datos
+                let li_content = document.createElement('li');// Creando items para la lista
+
+                let b = document.createElement('b');// Ademas de un elemento b para poner en negrita el titulo de cada elemento
+
+                b.textContent = datos[i].name + ": ";// Asignamos  el nombre de cada elemento dentro del b + un detalle que son los ": " para diferenciar el titulo del valor
+
+                //b.append(datos[i].name + ": ");// El codigo de arriba tambien se puede hacer con append de esta manera
+
+                li_content.append(b);// Asignamos como hijo el b (que contiene el nombre del elemento y el detalle de ": ") al item de la lista
+
+                li_content.append(datos[i].value);// Por ultimo, al item le asignamos el valor del campo obtenido en la iteracion actual (osea i)
+
+                lista.append(li_content);// Y a la lista se le añade el elemento
+
+                /* En resumen: Basicamente se construyo el item de la lista para despues asignarlo a la lista y se le fueron añadiendo elmentos a la lista en cada iteracion,
+                por lo que se construyo la lista en el bucle y el resultado se incrusto en la seccion correspondiente. */
+            }
+
+            datos_html.append(lista);// Ahora solo metemos esa lista en la seccion donde van os datos del usuario y ya sera visible
+
+        }
     });
-
-    // Misma historia: Solo que en este caso, iniciamos el ciclo (nuevamente)
-    var start = document.getElementById("start");
-
-    start.addEventListener('click',() =>{
-        tiempo = interval();
-    });
-
-    /*
-    // Se puede crear un intervalo o un timeout sin necesidad de asignarlo a una variable, simplemente usando la funcion, el detalle es que no se podra parar 
-    setInterval(function (){
-        console.log("Este mensaje se va a repetir cada 3 segundos...");
-    }, 3000);
-    */
 
 });
