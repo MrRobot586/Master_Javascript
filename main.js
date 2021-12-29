@@ -1,40 +1,52 @@
 /*
-    JSON - JavaScript Object Notation
-        - Sirve para declarar y utilizar objetos, que sirven como arrays asociativos, es decir, arrays cuyos indices son en erealidad referencias al contenido del indice como tal.
-        - Cada objeto json, tiene propiedades y metodos, las propiedades son definidas o declaradas y los metodos sirven para modificar alguna caracteristica o convertir el objeto.
-        - Para acceder a las propiedades de un objeto json se usa el nombre del elemento seguido de punto y la propiedad, ejemplo: "objeto.propiedad"
-        - Se pueden declarar objetos json dentro de otros o incluso objetos js como valores de algun indice de un array
+    LocalStorage en JS | Son datos que persisten mientras el usuario permanesca en la pagina web (igual que los datos de sesion pero en front end)
+        - Para acceder a este se usa el objeto con el mismo nombre "localStorage"
+        - Cada elemento guardado en este almacenamiento, tiene una key y un valor
+        - Los datos que ahi se almacenan por lo general son strings
 */
 
 'use strict'
 
 window.addEventListener('load',()=>{
 
-    // De esta forma se define un objeto JSON
-    var pelicula = {// Nombre del objeto seguido de la asignacion que se hace entre llaves
-        titulo: 'Bantan Vs. Superman',// Cade elemento se define con el nombre del mismo + dos puntos y el valor
-        year: 2016,// Cada elemento se separa por comas
-        pais: 'Estados unidos'// Excepto el ultimo que no lleva comas
-    };// Por supuesto se cierran las llaves y se coloca  ";"
+    if(typeof(localStorage) != undefined){// Comprobar si el localstorage existe o esta disponible en el navegador
+        
+        console.log("LocalStorage disponible!");
 
-    console.log(pelicula);// Salida de prueba para ver el objeto con todas sus propiedades
+        // - Crear un item en el LocalStorage | Guardar datos
+        localStorage.setItem("titulo","Curso de desarrollo web, victorroblesweb.");
 
-    pelicula.year = 2017;// Asi se puede reasignar el valor de una propiedad (solo se accede a ella y se le da otro valor)
+        // - Recuperar u obtener el valor de un item en el localstorage
+        console.log("Item del LocalStorage: ",localStorage.getItem("titulo"));
 
-    console.log(pelicula.year);// Asi se accede al valor de una propiedad espesifica
+        // - Eliminar items del localstorage
+        localStorage.removeItem("titulo");// Con el metodo removeitem() enviando como parametro el nombre de la key del item a eliminar, podemos remover elementos del localstorage
 
-    // Asi se define un array con un objeto json dentro
-    var peliculas = [
-        {titulo: 'cuestion de tiempo', year: '2013', pais: 'Reino Unido'},// Cada elemento separado por coma, pero en este caso el elemento esta entre llaves y tiene distintas propiedades
-        pelicula
-    ];
+        // - Eliminar por completo el localstorage
+        localStorage.clear();// Se  hace con el metodo clear()
 
-    console.log(peliculas);// Salida de prueba
+        // - Crear un item y guardar un objeto JSON en el LocalStorage
+        var usuario = {// Creamos el objeto y asignamos datos
+            nombre: "Diego Oropeza",
+            Email: "diegojoseoropeza@gmail.com"
+        };
 
-    console.log(peliculas[0].titulo);// Asi se accederia a un indice y luego a una propiedad de ese objeto (que esta dentro del indice)
+        // localStorage.setItem("usuario", usuario); // No se puede un objeto de forma nativa, porque no se guardan correctamente los datos
+        localStorage.setItem("usuario", JSON.stringify(usuario));// Para guaurdar un objeto json, se usa el objeto json y el metodo "stringify" para convertirlo en un string antes de guardarlo
+        /*
+            Para guardar un objeto json en el localstorage, se debe convertir a un json string, un json string es un string con formato json, es decir, una cadena de texto pero con las llaves y formato
+            que se guardan los datos en los objetos json. Esto se hace con el objeto json y el metodo stringify() enviando como parametro el objeto.
+        */
 
-    for(let index in peliculas){// Asi se recorreria un array
-        console.log(peliculas[index].titulo + " - " + peliculas[index].year);// Aca se imprime en consola el titulo y año de cada elemento
+        // - Recuperar un objeto JSON del localStorage
+        var user2 = JSON.parse(localStorage.getItem("usuario"));
+        /*
+            Para esto debemos reconvertir el json string dentro del item, en un objeto json usable y meterlo dentro de una variable.
+        */
+        console.log(user2);// Salida de prueba
+
+    }else{
+        console.log("LocalStorage no disponible en este navegador...");
     }
 
 });
