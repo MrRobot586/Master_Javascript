@@ -1,52 +1,93 @@
 /*
-    LocalStorage en JS | Son datos que persisten mientras el usuario permanesca en la pagina web (igual que los datos de sesion pero en front end)
-        - Para acceder a este se usa el objeto con el mismo nombre "localStorage"
-        - Cada elemento guardado en este almacenamiento, tiene una key y un valor
-        - Los datos que ahi se almacenan por lo general son strings
+    LocalStorage en JS | Ejercicio completo: Hecho por mi mismo
+        Este ejercicio lo resolvi antes de la explicacion en base a lo que yo crei que se podia hacer ante el problema
+
 */
 
 'use strict'
 
-window.addEventListener('load',()=>{
+window.addEventListener('load',function (){
 
-    if(typeof(localStorage) != undefined){// Comprobar si el localstorage existe o esta disponible en el navegador
+    if(localStorage != undefined){
         
-        console.log("LocalStorage disponible!");
+        var form_p = document.getElementById("formpelis");
 
-        // - Crear un item en el LocalStorage | Guardar datos
-        localStorage.setItem("titulo","Curso de desarrollo web, victorroblesweb.");
+        if(localStorage.getItem("pelis_count") == undefined){
+            localStorage.setItem("pelis_count", 0);
+        }else{
+            crearlista();
+        }  
 
-        // - Recuperar u obtener el valor de un item en el localstorage
-        console.log("Item del LocalStorage: ",localStorage.getItem("titulo"));
+        form_p.addEventListener('submit', function (event){
+            
+            event.preventDefault();
 
-        // - Eliminar items del localstorage
-        localStorage.removeItem("titulo");// Con el metodo removeitem() enviando como parametro el nombre de la key del item a eliminar, podemos remover elementos del localstorage
+            var pelicula = {
+                titulo: '',
+                año: '',
+                pais: ''
+            };
 
-        // - Eliminar por completo el localstorage
-        localStorage.clear();// Se  hace con el metodo clear()
+            pelicula.titulo = document.getElementById("p_titulo").value;
+            pelicula.año = parseInt(document.getElementById("p_año").value);
+            pelicula.pais = document.getElementById("p_pais").value;
 
-        // - Crear un item y guardar un objeto JSON en el LocalStorage
-        var usuario = {// Creamos el objeto y asignamos datos
-            nombre: "Diego Oropeza",
-            Email: "diegojoseoropeza@gmail.com"
-        };
+            if(pelicula.titulo == '' || pelicula.año <= 0 || pelicula.pais == '' ){
+                alert("Por favor llena todos los campos antes de continuar... ");
+            }else{
+                añadirpelicula(pelicula);
+                crearlista();
+            }
 
-        // localStorage.setItem("usuario", usuario); // No se puede un objeto de forma nativa, porque no se guardan correctamente los datos
-        localStorage.setItem("usuario", JSON.stringify(usuario));// Para guaurdar un objeto json, se usa el objeto json y el metodo "stringify" para convertirlo en un string antes de guardarlo
-        /*
-            Para guardar un objeto json en el localstorage, se debe convertir a un json string, un json string es un string con formato json, es decir, una cadena de texto pero con las llaves y formato
-            que se guardan los datos en los objetos json. Esto se hace con el objeto json y el metodo stringify() enviando como parametro el objeto.
-        */
-
-        // - Recuperar un objeto JSON del localStorage
-        var user2 = JSON.parse(localStorage.getItem("usuario"));
-        /*
-            Para esto debemos reconvertir el json string dentro del item, en un objeto json usable y meterlo dentro de una variable.
-        */
-        console.log(user2);// Salida de prueba
+        });
 
     }else{
         console.log("LocalStorage no disponible en este navegador...");
     }
 
 });
+
+function añadirpelicula(pelicula) {
+    localStorage.setItem(`peli_${localStorage.getItem("pelis_count")}`, JSON.stringify(pelicula));
+    localStorage.setItem("pelis_count", parseInt(localStorage.getItem("pelis_count")) + 1);
+}
+
+function crearlista() {
+    if (localStorage.getItem("pelis_count") != undefined && localStorage.getItem("pelis_count") >= 0) {
+
+        var count = localStorage.getItem("pelis_count");
+        var lista = document.createElement('ol');
+        lista.id = "lista_peliculas";
+        var titulo = document.createElement('h3');
+        titulo.textContent = "Lista de peliculas:";
+        titulo.id = "titulo_de_lista";
+        
+        for (let i = 0; i <= count; i++) {
+            var peli = JSON.parse(localStorage.getItem("peli_" + i));
+            if (peli != null) {
+                //console.log("Pelicula " + (i+1) +": " + peli.titulo + " | Año: " + peli.año);
+                var b = document.createElement('b');
+                var li = document.createElement('li');
+                b.textContent = "Pelicula: ";
+                li.append(b);
+                li.append(peli.titulo + " - " + peli.pais + ", " + peli.año);
+                lista.append(li);
+            }
+
+        }
+
+        if(document.getElementById('lista_peliculas') == null){
+            document.body.append(titulo);
+            document.body.append(lista);
+        }else{
+            document.body.removeChild(document.getElementById('lista_peliculas'));
+            document.body.removeChild(document.getElementById('titulo_de_lista'));
+
+            document.body.append(titulo);
+            document.body.append(lista);
+        }
+        
+
+    }
+}
+
