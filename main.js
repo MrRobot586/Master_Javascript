@@ -1,44 +1,54 @@
 /*
-    LocalStorage en JS | Ejercicio completo: Hecho por mi mismo
-        Este ejercicio lo resolvi antes de la explicacion en base a lo que yo crei que se podia hacer ante el problema
-
+    LocalStorage en JS | Ejercicio completo: Explicacion del video
+        Crear una lista de pelicuas en la que se puedan eliminar y crear elementos
+        (Utilizando, eventos y el localstorage)
 */
 
 'use strict'
 
 window.addEventListener('load',function (){
 
-    if(localStorage != undefined){
+    if(localStorage != undefined){// Comprobamos de que el localstorage es compatible con el navegador
         
-        var form_p = document.getElementById("formpelis");
+        var form_p = document.getElementById("formpelis");// Obtenemos el formulario
 
-        if(localStorage.getItem("pelis_count") == undefined){
-            localStorage.setItem("pelis_count", 0);
-        }else{
-            crearlista();
-        }  
-
-        form_p.addEventListener('submit', function (event){
+        form_p.addEventListener('submit', function (event){// Capturamos el evento submit
             
-            event.preventDefault();
+            //event.preventDefault();// Prevenimos el default del evento, que es recargar la pagina
 
-            var pelicula = {
-                titulo: '',
-                año: '',
-                pais: ''
-            };
-
-            pelicula.titulo = document.getElementById("p_titulo").value;
-            pelicula.año = parseInt(document.getElementById("p_año").value);
-            pelicula.pais = document.getElementById("p_pais").value;
-
-            if(pelicula.titulo == '' || pelicula.año <= 0 || pelicula.pais == '' ){
-                alert("Por favor llena todos los campos antes de continuar... ");
-            }else{
-                añadirpelicula(pelicula);
-                crearlista();
+            var titulo = document.querySelector('#p_titulo').value;// Obtenemos el valor del elemento con el id "p_titulo"
+            
+            if(titulo.length >= 1){// comprobamos si el texto cabturado no esta vacio
+                localStorage.setItem(titulo,titulo);// Y creamos un elemento en el localstorage con el nombre de ese texto
             }
 
+            // Mostrar los elementos
+            var ul = document.getElementById("peliculas_list");// obtenemos el elemento lista del body
+
+            for(let i in localStorage){// Recorremos los elementos del localstorage (si, se pueden recorrer los elementos del objeto localstorage con un for)
+                var li = document.createElement('li');// Creamos un item para añadir a la lista
+                
+                if(typeof(localStorage[i]) == 'string'){// Añadimos un elemento si es que la iteracion del localstorage es un string
+                    li.textContent = localStorage[i];// Entonces le asignamos el contenido de esa iteracion al item de lista
+                    ul.append(li);// Y el item a la lista
+                }
+            }
+            
+        });
+
+        // Formulario para eliminar elementos
+        var form_p_d = document.getElementById("formpelis_del");// Obtenemos el formulario
+
+        form_p_d.addEventListener('submit', function (event){// Capturamos el evento submit
+            
+            //event.preventDefault();
+
+            var titulo = document.querySelector('#p_titulo_del').value;// Obtenemos el elemento a eliminar del formulario (ubicandolo con el id)
+            
+            if(titulo.length >= 1){// Si es un elemento valido lo eliminamos
+                localStorage.removeItem(titulo);// Removemos el elemento del localstorage
+            }
+            
         });
 
     }else{
@@ -46,48 +56,3 @@ window.addEventListener('load',function (){
     }
 
 });
-
-function añadirpelicula(pelicula) {
-    localStorage.setItem(`peli_${localStorage.getItem("pelis_count")}`, JSON.stringify(pelicula));
-    localStorage.setItem("pelis_count", parseInt(localStorage.getItem("pelis_count")) + 1);
-}
-
-function crearlista() {
-    if (localStorage.getItem("pelis_count") != undefined && localStorage.getItem("pelis_count") >= 0) {
-
-        var count = localStorage.getItem("pelis_count");
-        var lista = document.createElement('ol');
-        lista.id = "lista_peliculas";
-        var titulo = document.createElement('h3');
-        titulo.textContent = "Lista de peliculas:";
-        titulo.id = "titulo_de_lista";
-        
-        for (let i = 0; i <= count; i++) {
-            var peli = JSON.parse(localStorage.getItem("peli_" + i));
-            if (peli != null) {
-                //console.log("Pelicula " + (i+1) +": " + peli.titulo + " | Año: " + peli.año);
-                var b = document.createElement('b');
-                var li = document.createElement('li');
-                b.textContent = "Pelicula: ";
-                li.append(b);
-                li.append(peli.titulo + " - " + peli.pais + ", " + peli.año);
-                lista.append(li);
-            }
-
-        }
-
-        if(document.getElementById('lista_peliculas') == null){
-            document.body.append(titulo);
-            document.body.append(lista);
-        }else{
-            document.body.removeChild(document.getElementById('lista_peliculas'));
-            document.body.removeChild(document.getElementById('titulo_de_lista'));
-
-            document.body.append(titulo);
-            document.body.append(lista);
-        }
-        
-
-    }
-}
-
