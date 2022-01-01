@@ -1,58 +1,65 @@
 /*
-    Peticiones ajax y fectch (peticiones asincronas)
-        Las peticiones ajax sirven para obtener datos de un back-end, como una api o una base de datos.
-        Estas peticiones suelen tardar cierto tiempo en responder con los datos, es aqui donde entran las promesas en juego
-        pues con estas se puede ejecutar un codigo luego de que una peticion ajax (con fetch) haya resultado exitosa o en un error.
+    Promesas y fetch()
+        Aclaraciones generales sobre las promesas y para que sirven...
+        - Una promesa sirve para esperar a que una funcion se ejecute para despues encadenar otra
+          Es decir, sirven para crear funciones que encadenen procedimientos continuamente uno tras otro
+          que no se ejecutan si el anterior aun no ha terminado de jecutarse.
+        - Cada que una promesa returnea un valor, otra promesa debe recojer ese valor, el ciclo acaba cuando ya
+          no se returnea ningun valor...
+        - No se cierra con punto y coma cuando se usa .then, se cierra pero en el ultimo de estos, ya que en teoria estos estan dentro de el fetch
 */
+
 
 'use strict'
 
 window.addEventListener('load',function (){
 
-    var users = [];// Creamos un array para almacenar los datos que recojeremos de la peticion ajax
+    // En este caso se resume un poco el ejercicio anterior
     
-    /*
-        Para realizar una peticion ajax usando fetch, se invoca a la funcion enviando como parametro la URL de la api,
-        esta a su vez devuelve una promesa, a la cual podemos acceder mediante la palabra reservada ".then", es decir,
-        una vez se termine la consulta la funcion fetch devolvera una promesa la cual porcesaremos en una funcion de callback
-        que se adjutara a la funcion ".then".
+    get_user_list()// Esta funcion, al llamarla realiza la peticion fetch para obtener la lista de usuarios | Recordar que cuando una funcion hace return de otra, en realidad se ejecuta la funcion devolvida, por lo que aca .then aplica al fetch
+        .then(data => data.json())// Al terminar la peticion: Procesamos la peticion convirtiendola a un JSON y returneando el resultado
+        .then(data => {// Luego de eso: Con la data que se proceso y se devolvio anteriormente 
+            Cargar_Lista_Usuarios(data.data);// Ejecutamos esta funcion, que da como resultado la lista de usuarios devuelta
 
-        basicamente, invocamos a la funcion fetch, con ".then" ejecutamos una fucnion de callback usando como parametro lo que devuelva
-        la funcion fetch que es una promesa. De esta promesa sacaremos la data que recibimos en la peticion ajax.
-    */
-    fetch('https://reqres.in/api/users?page=1')// Invocamos la funcion fetch enviando como parametro la URL de la api a consultar
-        .then(data => data.json())// Con .then esperamos a que se ejecute la peticion y procesamos los datos en una funcion anonima (callback)
-        // En este caso, returnamos data aplicandole el metodo ".json()", que convierte la promesa en formato json
-        
-        /* // Este seria el ejemplo del codigo de arriba pero con una funcion anonima y mas completa que una de flecha, mas codigo pero mas claro.
-        .then(function (data){
-            return data.json();
+            return get_user('3');// Returneamos la funcion get_user, que crea una nueva peticion ajax para pedir al usuario enviado como parametro
         })
-        */
-        
-        .then(data => {// Cuando se procese la informacion, encadenamos la siguiente operacion (es decir la funcion de callback), recordar que "data" el resultado del anterior proceso o funcion
-            users = data.data;// Igualamos users a data.data (que son los datos que buscamos en el JS)
-
-            var ul = document.createElement('ul');// Creamos una lista
-            
-            /* // Podemos recorrer los elementos del array (que fue lo que devolvio la peticion) con un for
-            for(let i in users){
-                console.log(users[i].id, users[i].email, users[i].first_name, users[i].last_name);
-            }
-            */
-
-            // O tambien usar un metodo llamado "map", que recibe una funcion de callback para iterar en un bucle
-            users.map(function (user,i){// Esta funcion devuelve el elemento en el cual estamos iterando de un array, lo que la hace perfecta para iterar arrays de objetos (el i es opcional)
-                //console.log(user.id, user.email, user.first_name, user.last_name);// Como devuleve cada elemento, solo debemos acceder a las propiedades de cada objeto para obtener sus datos
-                // Ya con este codigo simplemente armamos la lista
-                var li = document.createElement('li');
-                li.textContent = user.id + " - " + user.first_name + " " + user.last_name;
-                ul.append(li);
-            });
-
-            // Mostrar la lista - O mas bien montarla en el body
-            document.body.append(ul);
-
+        .then(data => data.json())// Convertirmos nuevamente la peticion (promesa) a un json
+        .then(data => {
+            Cargar_User(data.data);// Porcesamos con esta funcion
         });
 
 });
+
+function get_user_list(){// Funcion que obtiene lista de usuarios mediante peticion ajax
+    return fetch('https://reqres.in/api/users?page=1');
+}
+
+function get_user(user_id){// Funcion para obtener un usuario espesifico con ajax
+    return fetch('https://reqres.in/api/users/' + user_id);
+}
+
+function Cargar_User(user){// FUncion para cargar un usuario en el dom
+    var avatar = document.createElement('img');
+    var p = document.createElement('p');
+    p.style.textAlign = 'center';
+    avatar.src = user.avatar;
+    avatar.style.borderRadius = "50%";
+    
+    p.append(avatar);
+    p.append(document.createElement('br'));
+    p.append(document.createTextNode(user.first_name + " " + user.last_name));
+    
+    document.body.append(p);
+}
+
+function Cargar_Lista_Usuarios(users){// FUncion para cargar lista de usuarios en el dom
+    var ul = document.createElement('ul');
+            
+    users.map(function (user){
+        var li = document.createElement('li');
+        li.textContent = user.first_name + " " + user.last_name;
+        ul.append(li);
+    });
+
+    document.body.append(ul);
+}
