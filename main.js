@@ -1,6 +1,6 @@
 /*
-    Capturar errores en codigo JS: Try catch, se usa para capturar un error en codigo o interno...
-    Con catch se captura el error y con try se ejecuta el codigo a probar.
+   Fechas en JavaScript - Las fechas en javascript se instancian con el objeto Date
+        Con date, se puede acceder a la fecha actual. 
 */
 
 
@@ -8,13 +8,17 @@
 
 window.addEventListener('load',function (){
 
-    var year = 2022;
+    var fecha = new Date;// Para obtener la fecha actual, se instancia un nuevo objeto date y se asigna a una variable
 
-    // Ejemplo, aca se ejecuta un alert pero la variable esta mal escrita, entonces como hay un error
-    try{
-        alert(yea);
-    }catch(error){// Catch lo captura y ejecuta un codigo en caso de que esto pase
-        console.log("Error de codigo: " + error);
-    }
+    // Para sacar dia, mes o año de una fehca, se usa el objeto resultante seguido de un metodo como por ejemplo .month() para sacar el mes
+    var texto_fecha = `
+        Fecha completa: ${fecha}
+            - El dia es: ${fecha.getDate()}
+            - El mes es: ${fecha.getMonth() + 1}
+            - El año es: ${fecha.getFullYear()}
+    `;
+
+    // Nota: Tomar en cuenta que algunos resultados son en base a 0, es decir, month devuelve 0 cuando se refiere al mes 1 (enero)
+    console.log(texto_fecha);// Salida de prueba
 
 });
