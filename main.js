@@ -1,6 +1,10 @@
 /*
-   Fechas en JavaScript - Las fechas en javascript se instancian con el objeto Date
-        Con date, se puede acceder a la fecha actual. 
+    funciones matematicas en JavaScript
+        - Existen muchas funciones matematicas para realizar operaciones ademas de las comunes y corrientes
+        - Ejemplo: El objeto Math tiene distintas propiedades y metodos que sirven para realizar operaciones como:
+            - Sacar numeros random
+            - Sacar el valor de PI 
+            - Rendondear numeros
 */
 
 
@@ -8,17 +12,9 @@
 
 window.addEventListener('load',function (){
 
-    var fecha = new Date;// Para obtener la fecha actual, se instancia un nuevo objeto date y se asigna a una variable
+    console.log(Math.PI);// Muestra el valor de PI (completo)
 
-    // Para sacar dia, mes o año de una fehca, se usa el objeto resultante seguido de un metodo como por ejemplo .month() para sacar el mes
-    var texto_fecha = `
-        Fecha completa: ${fecha}
-            - El dia es: ${fecha.getDate()}
-            - El mes es: ${fecha.getMonth() + 1}
-            - El año es: ${fecha.getFullYear()}
-    `;
+    console.log(Math.random());// Saca un numero random
 
-    // Nota: Tomar en cuenta que algunos resultados son en base a 0, es decir, month devuelve 0 cuando se refiere al mes 1 (enero)
-    console.log(texto_fecha);// Salida de prueba
-
+    console.log(Math.ceil(Math.random()*100));// Redondea un nuemro generado aleatoriamente 
 });
