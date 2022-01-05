@@ -1,6 +1,5 @@
 /*
-    Jquery en JavaScript | Selectores de clase
-        - Al igual que el selector de ID se usa el mismo formato que en CSS
+    Jquery en JavaScript | Selectores de etiquetas   
 */
 
 
@@ -8,22 +7,33 @@
 
 $(document).ready(function () {
 
-    var tomato = $('.tomato');// De esta forma se seleccionan todos los elementos de la clase "tomato"
-    
-    tomato.css('background','tomato')// Tambien se le pueden añadir estilos a todos de un solo golpe sin necesidad de recorrer la variable como array
-          .css('color','white')
-          .css('text-align','center');
-    
-    // La variable tomato, sin embargo, si es un array. Es decir, se puede iterar
-    console.log(tomato);// Salida de prueba
+    // Para seleccinar una etiqueta simplemente ponemos su nombre como parametro al invocar al jquery
+    var parrafos = $('p');// En este caso le damos su referencia a la variable parrafo
+    parrafos.css('cursor','pointer');// Ademas de darle un estilo (que el cursor sea un puntero al pasarlo ensima)
 
-    // Tambien se pueden añadir eventos de click (como en este caso) - A los elementos de la clase "otro", se le añade un event listener del evento click
-    $('.otro').click(function (e) {// Funciona de la misma manera que un eventlistener, se envia una funcion de callback que se ejecutara en caso de que el evento suceda
-        // En este caso se cambian los estilos css del elemento en cuestion
-        $(this).css('background','tomato')// Haciendo referencia al mismo con el selector "this"
-               .css('color','white')
-               .css('text-align','center');
+    // Para el ejemplo, se usara el evento click para cambiar los estilos de cada parrafo segun su contenido
+    parrafos.click(function (){// Escuchando el evento click
+        let p = $(this).text();// Con el metodo "text()", obtenemos o editamos el texto que tenga esa etiqueta o elemento seleccionado, en este caso el del parrafo
 
-        console.log(this);// Imprimimos this, para darnos cuenta de que es un elemento html
+        switch (p.toLowerCase()) {// En este caso se usa el metodo "tolowercase", para que este todo el texto en minuscula y compararlo bien
+            // Editamos los estilos css segun sea el caso, usando this como selector, ya que es el elemento al que le damos click
+            case 'la bandera':
+                $(this).css('background','yellow')
+                       .css('color','gray')
+                       .css('text-align','center');
+                break;
+
+            case 'de':
+                $(this).css('background','blue')
+                       .css('color','white')
+                       .css('text-align','center');
+                break;
+            case 'venezuela':
+                $(this).css('background','red')
+                       .css('color','white')
+                       .css('text-align','center');
+                break;
+        }
     });
+
 });
