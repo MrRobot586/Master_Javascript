@@ -1,5 +1,5 @@
 /*
-    Jquery en JavaScript | Evento click y doble click
+    Jquery en JavaScript | Eventos mousedown y mouseup, mas ejemplos...
 */
 
 
@@ -7,24 +7,33 @@
 
 $(document).ready(function (){
 
-    // seleccionamos el elemento con jquery
+    // Capturamos el elemento
     const caja = $('#caja');
 
-    // Evento click
-    caja.click(function(){
-        console.log("Has hecho click en el elemento!!");
+    // Con mousedow, se captura el evento de cuando el click del mouse este precionado
+    caja.mousedown(function (){ 
+        $(this).css('background','gray')
+               .text(':(');
+    });
 
+    // Y con moseup, capturamos el evento de cuando el mouse deje de estar precionado
+    caja.mouseup(function(){
         $(this).css('background','salmon')
                .text(':)');
     });
 
-    // Evento doble click
-    caja.dblclick(function(){
-        console.log("Has hecho doble click en el elemento!!");
+    // Nota: En este caso cambiamos los estilos css del elemento seleccionado para cada caso (mousedown y mouseup)
 
-        $(this).css('background','grey')
-               .text(':(');
+    // Con mousemove(), podemos detectar si es que el mouse se mueve por ensima de un elemento
+    const point = $('#circulo');
+
+    $(document).mousemove(function (event){// En este caso detectamos el movimiento del mouse en todo el documento
+        point.css('left',event.clientX)// Y movemos el elemento a los ejes X y Y en donde se encuentra
+             .css('top',event.clientY);// En cadenamos otro metodo
+             
+        $('body').css('cursor','none');// Tambien quitamos el cursor para apreciar mejor el evento
     });
 
-    // Nota: Tambien se pueden eviar funciones completas a un callback de cualquier evento pero con la excepcion de que estas no tendran parametros
+    // Nota: con "event.clientXY" obtenemos las coordenadas del la posicion actual del mouse
+    
 });
