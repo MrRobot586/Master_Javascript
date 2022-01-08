@@ -1,5 +1,5 @@
 /*
-    Jquery en JavaScript | Evento hover
+    Jquery en JavaScript | Evento click y doble click
 */
 
 
@@ -10,26 +10,21 @@ $(document).ready(function (){
     // seleccionamos el elemento con jquery
     const caja = $('#caja');
 
-    // Capturamos el evento hover: Que se activa cuando el mouse esta ensima del elemento y tambien cuando esta fuera.
-    // Es decir, captura tanto el mouseover como el mouseout en un solo evento | Se captura con el metodo "hover"
-    caja.hover(function(){// Se envian como parametros 2 funciones de callback de las cuales la primera es para mouseover y la segunda para mouseout
-        $(this).css('background','gray')
-               .text(':(');
-    },function(){
+    // Evento click
+    caja.click(function(){
+        console.log("Has hecho click en el elemento!!");
+
         $(this).css('background','salmon')
                .text(':)');
     });
 
-    // Curiosamente tambien se pueden enviar 2 funciones ya hechas, pero sin los parentencis ni parametros en estas
-    caja.hover(feli,tiste);
+    // Evento doble click
+    caja.dblclick(function(){
+        console.log("Has hecho doble click en el elemento!!");
 
-    function feli() {
-        $(this).css('background','salmon')
-               .text(':)');
-    }
-
-    function tiste() {
-        $(this).css('background','gray')
+        $(this).css('background','grey')
                .text(':(');
-    }
+    });
+
+    // Nota: Tambien se pueden eviar funciones completas a un callback de cualquier evento pero con la excepcion de que estas no tendran parametros
 });
