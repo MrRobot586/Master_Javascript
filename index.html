@@ -10,27 +10,35 @@
     <!-- Para cargar jquery se usa una cdn o un script y como ruta se pone la del archivo de la libreria | En este caso se usa un CDN-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/Javascript" src="main.js"></script><!-- Recordar cargar cualquier script que use jquery despues de cargar el jquery -->
+    <style>
+        #caja{
+            margin: auto;
+            padding: 30px;
+            width: 2.5%;
+            text-align: center;
+            border: 5px solid gray;
+            border-radius: 25px;
+            background: salmon;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    </style>
 </head>
     
 <body>
 
-<h1 id="head">Curso de javascript by: VictorRoblesweb.es</h1>
-
-    <h3>Lista de enlaces interactiva:</h3>
-
-    <form id="add_link_form">
-        <label for="add_link">Añadir un enlace:</label><br>
-        <input type="text" name="add_link">
-
-        <input type="submit" value="Añadir" disabled>
-    </form>
-
-    <ul id="links">
-        <li><a href="https://www.google.com"></a></li>
-        <li><a href="https://www.facebook.com"></a></li>
-        <li><a href="https://www.youtube.com"></a></li>
-    </ul>
+    <h1 id="head">Curso de javascript by: VictorRoblesweb.es</h1>
+    <button id="btn_mostrar">
+        Mostrar
+    </button>
     
+    <button id="btn_ocultar">
+        Ocultar
+    </button>
+
+    <button id="toggle_btn">toggle</button>
+
+    <div id="caja">uwu</div>
 </body>
 
 </html>
