@@ -6,37 +6,55 @@
 
 $(document).ready(function (){
 
-    // Obtenemos el elemento con el ID data para ahi colocar los datos que retorne la peticion
-    const data = $('#data');
-
     /*
-        Peticiones GET con jquery - $.get(url,parametros,function(response){ --- });
-            Esta peticion se hace con el metodo $.get() que recibe 3 parametros de los cuales 2 son obligatorios
-            los parametros son: 
-                - La URL a la cual se hara la peticion
-                - Un json con los parametros que se enviaran en la peticion GET
-                - Una funcion de callback que recibe la respuesta de la peticion y dentro de esta se procesan los datos
+        Peticiones POST con jquery - $.post(URL,datosJSON,function(res){ --- }); 
+            Esta peticion se raliza con el metodo o funcion $.post(), que recibe 3 parametros:
+                - La URL a la que se hara la peticion
+                - Los datos en formato JSON
+                - Una funcion de callback que recibe como parametro un objeto que devolvera como respuesta la API
+            
+            En este caso, la funcion como tal no es necesaria... Sin embargo es bueno tener en cuenta la respuesta del servidor
+            con lo cual, es bueno mandar este parametro para saber si la respuesta fue positiva o no.
 
-            De estos parametros solo la ULR y la funcion son obligatorios, los parametros de la peticion pueden enviarse en la misma URL
+            Por lo genereal el metodo post se usa para registrar datos en la base de datos y get para obtenerlos.
+            En este caso registraremos un usuario en la base de datos de la API mediante un formulario y de forma manual tambien
     */
 
-    // En este caso hacemos una request a la pagina reqrest y pedimos una lista de usuarios
-    $.get('https://reqres.in/api/users',{page: 2},function(response){// Primero la URL, luego los parametros y por ultimo la funcion
-        write_names(response,data);// Dentro de esta funcion procesamos la info que viene dentro de response | En este caso ejecutamos una funcion que recibe la respuesta y un div para imprimir los datos en el DOM
+    // Metodo post - De forma manual: En este caso definiremos el usuario y lo registraremos haciendo una peticion post 
+    let usuario = {
+        name: "Diego",
+        job: "jr Developer"
+    };
+
+    // En este caso enviamos la peticion a la URL de reqrest, el usuario y la funcion para recibir la respuesta
+    $.post('https://reqres.in/api/users', usuario, function(res){
+        console.log(res);// Mostramos la respuesta por consola
     });
 
-    /*   
-        // Asi se veria la misma peticion pero sin usar el segundo parametro y colocando los parametros en la misma URL
-        $.get('https://reqres.in/api/users?page=2',function(response){
-            write_names(response,data);
-        });
-    */
+
+    // Metodo post - De forma dinamica: Esta vez pediremos o usaremos los datos que se recojen de este formulario
+    const form = $('[action="https://reqres.in/api/users"]');
+    
+    form.submit(function (e){// Detectamos el evento submit
+        e.preventDefault();// Cancelamos el envio de datos por defecto
+
+        // Obtenemos los datos
+        let name = $('[name="nombre"]').val();
+        let job = $('[name="job"]').val();
+        
+        // Comprobamos que no esten vacios
+        if(job != '' && name != '' ){// Y los asignamos al objeto que se enviara en la funcion $.post()
+            usuario.name = name;
+            usuario.job = job;
+            
+            // Llamamos a la funcion envamos los parametros
+            // En este caso "form.attr('action')" - Tiene el valor de la URL a donde se hara la peticion, que esta en el action del formulario
+            $.post(form.attr('action'), usuario, function(res){
+                console.log(res);
+            }).done(function(){// Ademas, se pede encadenar el metodo ".done", para ejecutar un callback cuando se ejecute la peticion satisfactoriamente
+                alert("Usuario registrado, satisfactoriamente...");
+            });
+        }
+
+    });
 });
-
-// Funcion para escribir los nombres en el DOM - Recibe el objeto response y un elemento HTML donde meter los datos
-function write_names(response,section) {
-    response.data.forEach(element => {
-        //console.log(element.first_name);
-        section.append('<p><b>[ ' + element.id + ' ] Nombre(s): </b>' + element.first_name + ' ' + element.last_name + '</p>')
-    });
-}
