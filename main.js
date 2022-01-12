@@ -6,9 +6,15 @@
 
 $(document).ready(function (){
 
-    // Selectable - Permite seleccionar elementos de una lista dando click ensima 
-    $('.lista').selectable();// Se aplica el metodo a una lista (ul/ol)
-    // Hay que mencionar que se tiene que añadir al css las reglas del formato de los elemntos seleccionados
-    // Para ello se le dan estilos a las clases "ui-selected" y "ul-selecting"
+    // Sortable - Lista de elementos que se pueden ordenar, osea mover pero no sacar de la lista
+    $('.lista').sortable({
+        update: function(event,ui){
+            console.log("Actualizacion...");
+            console.log(event,ui);
+        }
+    });
+
+    // Este recibe un json como parametro que a su vez tiene una propiedad update, dentro de la cual hay una funcion de callback
+    // que se ejecuta cada que se actualiza un elemento de la lista a la que se aplico el metodo
 
 });
