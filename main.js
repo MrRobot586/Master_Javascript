@@ -6,18 +6,26 @@
 
 $(document).ready(function (){
 
-    // Droppable - El elemeto seleccionado detecta cuando un se suelta un elemento "draggable" dentro de si
-    $('#droppable_area').droppable({
-        drop: function(){
-            console.log("drop");
-        }
+    // Efectos en jquery UI
+    $('#activar_efecto').click(function(){
+        $('#caja').toggle('puff');
+
+        /*
+            Con jquery UI se añaden muchos efectos nuevos para ocultar y mostrar elementos:
+                - puff
+                - fade
+                - explode
+                - blind 
+                - slide
+                - drop
+                - fold
+                - scale
+                - shake
+                - 
+            Los cuales se pueden usar con el metodo toggle(efecto) o con effect(efecto)
+            Enviado como parametro el nombre del efecto que queremos aplicar al elemento
+            Nota: Tambien se pueden pasar opciones y la velocidad del efecto, pero son parametros opcionales.
+        */
     });
 
-    $('#droppable_item').draggable();
-
-    /*
-        Estas funciones o metodos, reciben un json con una serie de indicaciones sobre  los eventos que ocurren
-        al usar los elementos a los que se les aplican. Como en este caso la propiedad "drop", ejecuta un callback
-        cuando detecta el evento de que un elemento fue soltado
-    */
 });
