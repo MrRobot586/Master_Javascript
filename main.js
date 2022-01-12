@@ -6,15 +6,18 @@
 
 $(document).ready(function (){
 
-    // Sortable - Lista de elementos que se pueden ordenar, osea mover pero no sacar de la lista
-    $('.lista').sortable({
-        update: function(event,ui){
-            console.log("Actualizacion...");
-            console.log(event,ui);
+    // Droppable - El elemeto seleccionado detecta cuando un se suelta un elemento "draggable" dentro de si
+    $('#droppable_area').droppable({
+        drop: function(){
+            console.log("drop");
         }
     });
 
-    // Este recibe un json como parametro que a su vez tiene una propiedad update, dentro de la cual hay una funcion de callback
-    // que se ejecuta cada que se actualiza un elemento de la lista a la que se aplico el metodo
+    $('#droppable_item').draggable();
 
+    /*
+        Estas funciones o metodos, reciben un json con una serie de indicaciones sobre  los eventos que ocurren
+        al usar los elementos a los que se les aplican. Como en este caso la propiedad "drop", ejecuta un callback
+        cuando detecta el evento de que un elemento fue soltado
+    */
 });
