@@ -6,7 +6,8 @@
 
 $(document).ready(function (){
 
-    // Draggable - Hacer que un elemento se pueda mover al mantenerlo pulsado con el mouse
-    $('.caja').draggable();
+    // Resizable - Elementos que se pueden cambiar de tamaño el el DOM
+    // Para esto se incluye el "min.css" de jquery UI en el HTML
+    $('.caja').resizable();
 
 });
