@@ -7,54 +7,58 @@
 $(document).ready(function (){
 
     /*
-        Peticiones POST con jquery - $.post(URL,datosJSON,function(res){ --- }); 
-            Esta peticion se raliza con el metodo o funcion $.post(), que recibe 3 parametros:
-                - La URL a la que se hara la peticion
-                - Los datos en formato JSON
-                - Una funcion de callback que recibe como parametro un objeto que devolvera como respuesta la API
-            
-            En este caso, la funcion como tal no es necesaria... Sin embargo es bueno tener en cuenta la respuesta del servidor
-            con lo cual, es bueno mandar este parametro para saber si la respuesta fue positiva o no.
-
-            Por lo genereal el metodo post se usa para registrar datos en la base de datos y get para obtenerlos.
-            En este caso registraremos un usuario en la base de datos de la API mediante un formulario y de forma manual tambien
+        Metodo $.ajax({ jSON }); - Permite hacer cualquier tipo de peticion independientemente si es por post o get
+            Mediante el metodo $.ajax(), se puede hacer cualquier tipo de peticion ajax, ya sea get o post.
+            Esta funcion recibe como parametro una JSON con los parametros de la peticion de los cuales solo algunos son estricamente
+            necesarios:
+                - type: Este es el tipo de peticion a realizar
+                - url: Esta es la URL de a la que se hara la peticion
+                - data: Este es un objeto json que tiene los datos a solicitar o enviar
+            Tambien recibe otros parametros como:
+                - dataType: QUe es el tipo/formato de datos que recibe o envia la peticion
+                - contentType: Que es el contenido de la peticion
+            Ademas, recibe varios parametors opcionales que como tal son callbacks:
+                - beforesend: Una funcion de callback que se ejcuta justo al enviar la peticion
+                - succes: una funcion de callback (recibe la respuesta de la peticion) que se ejecuta cuando se termina de ejecutar la peticion exitosamente
+                - error: Funcion de callback que recibe un error en caso de que ocurra se ejecuta
+                - timeout: numero entero de milisegundos que debe tardar como maximo la peticion (si tarda mas de eso, se considera error)
     */
 
-    // Metodo post - De forma manual: En este caso definiremos el usuario y lo registraremos haciendo una peticion post 
-    let usuario = {
+    // Este ejemplo sirve para hacer peticiones ajax tanto post como get 
+    //  - Si se envia usuario_post y se cambia el metodo a post la peticion registrara datos en la api
+    //  - Si se envia usuario_get y se cambia el metodo a get la peticion obtendra datos de la api
+
+    // Notar que este json tiene datos para registrar al usuario
+    var usuario_post = {
         name: "Diego",
         job: "jr Developer"
     };
 
-    // En este caso enviamos la peticion a la URL de reqrest, el usuario y la funcion para recibir la respuesta
-    $.post('https://reqres.in/api/users', usuario, function(res){
-        console.log(res);// Mostramos la respuesta por consola
-    });
-
-
-    // Metodo post - De forma dinamica: Esta vez pediremos o usaremos los datos que se recojen de este formulario
-    const form = $('[action="https://reqres.in/api/users"]');
+    // Mientras que este Json solo tiene el dato para indentificar el dato a traer
+    var usuario_get ={
+        id: 1
+    };
     
-    form.submit(function (e){// Detectamos el evento submit
-        e.preventDefault();// Cancelamos el envio de datos por defecto
+    // URL para hacer la peticion
+    var url = 'https://reqres.in/api/users';
 
-        // Obtenemos los datos
-        let name = $('[name="nombre"]').val();
-        let job = $('[name="job"]').val();
-        
-        // Comprobamos que no esten vacios
-        if(job != '' && name != '' ){// Y los asignamos al objeto que se enviara en la funcion $.post()
-            usuario.name = name;
-            usuario.job = job;
-            
-            // Llamamos a la funcion envamos los parametros
-            // En este caso "form.attr('action')" - Tiene el valor de la URL a donde se hara la peticion, que esta en el action del formulario
-            $.post(form.attr('action'), usuario, function(res){
-                console.log(res);
-            }).done(function(){// Ademas, se pede encadenar el metodo ".done", para ejecutar un callback cuando se ejecute la peticion satisfactoriamente
-                alert("Usuario registrado, satisfactoriamente...");
-            });
-        }
-
+    $.ajax({
+        type: 'GET',
+        //dataType: 'json',
+        //contentType: 'application/json',
+        url: url,
+        data: usuario_get,
+        beforeSend: function(){
+            console.log("Enviando peticion...");
+        },
+        success: function(response){
+            console.log("Peticion enviada!");
+            console.log(response);
+        },
+        error: function(error){
+            console.log(error);
+        },
+        timeout: 2000
     });
+
 });
