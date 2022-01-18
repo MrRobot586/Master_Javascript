@@ -4,43 +4,105 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master en JS</title>
+    <title>Proyecto practico - Master en JS</title>
 
-    <!-- Cargamos los estilos CSS de jqueryUI para poder crear elmentos resizeables -->
-    <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.min.css">
-    <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.structure.min.css">
-    <link rel="stylesheet" href="jquery-ui-1.13.0/jquery-ui.theme.min.css">
-    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="jquery-ui-1.13.0/jquery-ui.min.js"></script>
-    <script type="text/Javascript" src="main.js"></script>
-    
+    <script type="text/JavaScript" src="js/main.js"></script>
 </head>
-    
 <body>
-
-    <h1 id="head">Curso de javascript by: VictorRoblesweb.es</h1>
-
-    <div id="tab_index">
-        <ul>
-            <li><a href="#tabs-1">Pestaña 1</a></li>
-            <li><a href="#tabs-2">Pestaña 2</a></li>
-            <li><a href="#tabs-3">Pestaña 3</a></li>
-        </ul>
-
-        <div id="tabs-1">
-            Pestaña 1 - Contenido
-        </div>
     
-        <div id="tabs-2">
-            Pestaña 2 - Contenido
+    <section id="main_container">
+        <header>
+            <div id="nav_title">
+                <h1>Proyecto JS</h1>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <nav id="nav_bar">
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Reloj</a></li>
+                    <li><a href="#">Calendario</a></li>
+                    <li><a href="#">Calculadora</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="slidershow">
+
         </div>
-    
-        <div id="tabs-3">
-            Pestaña 3 - Contenido
+
+        <div id="page_content">
+            <div id="posts_section">
+                <article class="post">
+                    <h2>Post de ejemplo</h2>
+                    <span>Fecha de publicacion...</span>
+        
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                        Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.
+                    </p>
+
+                    <a href="#" class="btn_leermas">Leer mas...</a>
+                </article>
+
+                <article class="post">
+                    <h2>Post de ejemplo</h2>
+                    <span>Fecha de publicacion...</span>
+        
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                        Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.
+                    </p>
+
+                    <a href="#" class="btn_leermas">Leer mas...</a>
+                </article>
+            </div>
+            
+            <aside id="side_bar">
+                <div id="about">
+                    <h4 class="side_h4"><span>¿Quien soy?</span></h4>
+                    <img src="img/caracol.jpg" alt="profile pic">
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                        Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="side_h4"><span>Indentificate:</span></h4>
+
+                    <form id="login_form">
+                        <label for="nombre">Nombre: </label><br>
+                        <input type="text" name="nombre" /><br>
+                        
+                        <label for="mail">E-mail: </label><br>
+                        <input type="email" name="mail" /><br>
+            
+                        <label for="contraseña">Contraseña: </label><br>
+                        <input type="password" name="contraseña" /><br>
+
+                        <input type="submit" value="Registrar">
+                    </form>
+                </div>
+            </aside>
+
+            <div class="clearfix"></div>
         </div>
-    </div>
+    </section>
+
+    <footer>
+        Proyecto practico JS - Diego Oropeza &copy
+    </footer>
 
 </body>
-
 </html>

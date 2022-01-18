@@ -1,0 +1,175 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+body {
+    background: url('../img/hojas.jpg');
+    background-attachment: fixed;
+}
+
+#main_container {
+    background: white;
+    width: 70%;
+    margin: 0px auto;
+    margin-top: 50px;
+    padding:  25px 25px 0px 25px;
+    box-shadow: 2px 0px 10px grey;
+}
+
+#nav_title {
+    background: #235e3D;
+    color: white;
+    font-family: Verdana, Arial;
+    font-size: 30px;
+    letter-spacing: 3px;
+    text-align: center;
+    width: 385px;
+    height: 80px;
+    line-height: 80px;
+    float: left;
+}
+
+#nav_bar {
+    font-family: Helvetica, Arial;
+    background: #333;
+    width: 100%;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+#nav_bar ul {
+    line-height: 46px;
+}
+
+#nav_bar ul li {
+    height: 46px;
+    display: inline-block;
+    transition: all 500ms;
+}
+
+#nav_bar ul li:hover {
+    background: #235e3D;
+}
+
+#nav_bar ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+#posts_section {
+    width: 60%;
+    font-family: Helvetica, Arial;
+    float: left;    
+}
+
+.post {
+    color: #333;
+    padding: 5px;
+    margin-bottom: 25px;
+}
+
+.post h2 {
+    font-size: 30px;
+}
+.post span{
+    display: block;
+    color: #ccc;
+}
+
+.post p {
+    margin-top: 15px;
+    line-height: 22px;
+    text-align: justify;
+}
+
+.btn_leermas {
+    display: block;
+    padding: 15px;
+    background: #333;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    margin-top: 20px;
+    width: 91px;
+    transition: 500ms;
+}
+
+.btn_leermas:hover {
+    background: #235e3D
+}
+
+#side_bar {
+    font-family: Helvetica, Arial;
+    width: 31%;
+    float: right;
+    color: #333;
+}
+
+#about {
+    padding: 5px;
+}
+
+#about img {
+    width: 100%;
+}
+
+.side_h4 {
+    margin-top: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 10px;
+    background: url('../img/lines.png') repeat-x;
+}
+
+.side_h4 span {
+    background: white;
+    padding:  0px 5px 0px 5px;
+}
+
+#about p {
+    margin-top: 10px;
+    font-size: 15px;
+    text-align: justify;
+}
+
+#login_form input[type="text"],
+#login_form input[type="email"],
+#login_form input[type="password"] {
+    padding: 5px;   
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 75%;
+}
+
+#login_form input[type="submit"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+footer {
+    font-family: Helvetica, Arial;
+    color: white;
+    height: 47px;
+    background: rgba(51, 51, 51, 0.95);
+    width: 70%;
+    margin: 0px auto;
+    margin-top: 50px;
+    line-height: 47px;
+    padding:  25px 25px 25px 25px;
+    text-align: center;
+}
