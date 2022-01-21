@@ -173,3 +173,7 @@ footer {
     padding:  25px 25px 25px 25px;
     text-align: center;
 }
+
+.bx-wrapper, .bx-viewport {
+    height: 250px !important;
+}
