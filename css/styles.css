@@ -23,7 +23,6 @@ body {
 }
 
 #nav_title {
-    background: #235e3D;
     color: white;
     font-family: Verdana, Arial;
     font-size: 30px;
@@ -52,10 +51,6 @@ body {
     height: 46px;
     display: inline-block;
     transition: all 500ms;
-}
-
-#nav_bar ul li:hover {
-    background: #235e3D;
 }
 
 #nav_bar ul li a {
@@ -103,10 +98,6 @@ body {
     margin-top: 20px;
     width: 91px;
     transition: 500ms;
-}
-
-.btn_leermas:hover {
-    background: #235e3D
 }
 
 #side_bar {
@@ -176,4 +167,37 @@ footer {
 
 .bx-wrapper, .bx-viewport {
     height: 250px !important;
+}
+
+#selector_theme {
+    position: fixed;
+    top: 40%;
+    background: rgba(51, 51, 51, 0.7);
+    width: 50px;
+    height: 100px;
+}
+
+#to_green,
+#to_red,
+#to_blue {
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    display: block;
+    margin: 0px auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+#to_green {
+    background: #235e3D;
+}
+
+#to_red {
+    background: #CA3413;
+}
+
+#to_blue {
+    background: #1F87C4;
 }

@@ -1,0 +1,16 @@
+body {
+    background: url('../img/rojo.jpg');
+    background-attachment: fixed;
+}
+
+#nav_title {
+    background: #CA3413;
+}
+
+#nav_bar ul li:hover {
+    background: #CA3413;
+}
+
+.btn_leermas:hover {
+    background: #CA3413;
+}

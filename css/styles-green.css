@@ -1,0 +1,16 @@
+body {
+    background: url('../img/hojas.jpg');
+    background-attachment: fixed;
+}
+
+#nav_title {
+    background: #235e3D;
+}
+
+#nav_bar ul li:hover {
+    background: #235e3D;
+}
+
+.btn_leermas:hover {
+    background: #235e3D;
+}

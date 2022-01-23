@@ -81,4 +81,35 @@ $(document).ready(function (){
         });
     }
 
+    // Cambiador de temas | Usando distintos archivos CSS
+
+    /*
+        Se crea un archivo css general que tenga los estilos de toda la pagina y los backgrounds y colores dominantes se exportan a otros archivos
+        que se cargaran luego del archivo principal, habran 3 variaciones de los colores de la pagina en 3 archivos distintos. Secargara uno de estos 
+        por defecto (que sera el green).
+
+        A la etiqueta "link" que carga el archivo css del tema por defecto se le asigna una id para poder capturarla y luego cambiar su href
+        para hacer referencia a otro "tema" (o archivo css).
+
+        Con ayuda de "botones" en los que capturamos el evento click (con jquery), cambiamos el href de la etiqueta link para hacer referencia a otro
+        tema CSS. Es bastante facil, la verdad...
+    */
+
+    // Capuramos los botones
+    const red = $('#to_red');
+    const green = $('#to_green');
+    const blue = $('#to_blue');
+
+    // Cada boton sera un color espesifico, en este caso red
+    red.click(function (){
+        $('#theme').attr('href','css/styles-red.css');// Que al hacer click sobre este, cambiaremos el valor del atributo href a la direccion del styles-red.css
+    });// Lo mismo aplica para los demas botones
+
+    green.click(function (){
+        $('#theme').attr('href','css/styles-green.css');
+    });
+
+    blue.click(function (){
+        $('#theme').attr('href','css/styles-blue.css');
+    });
 });
