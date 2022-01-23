@@ -99,17 +99,33 @@ $(document).ready(function (){
     const red = $('#to_red');
     const green = $('#to_green');
     const blue = $('#to_blue');
-
+    
     // Cada boton sera un color espesifico, en este caso red
     red.click(function (){
-        $('#theme').attr('href','css/styles-red.css');// Que al hacer click sobre este, cambiaremos el valor del atributo href a la direccion del styles-red.css
-    });// Lo mismo aplica para los demas botones
+        let theme = "css/styles-red.css";
+        changetheme(theme);
+    });
 
     green.click(function (){
-        $('#theme').attr('href','css/styles-green.css');
+        let theme = "css/styles-green.css";
+        changetheme(theme);
     });
 
     blue.click(function (){
-        $('#theme').attr('href','css/styles-blue.css');
+        let theme = "css/styles-blue.css";
+        changetheme(theme);
     });
+
+    // Plus: Hacer que el color seleccionado se guarde en el local storage y que se carge automaticamente ( es decir que persista)
+    if(localStorage.getItem('theme') && localStorage.getItem('theme') != ''){// En este caso con un poco de logica y una funcion para establecer el tema
+        changetheme(localStorage.getItem('theme'));// Detectamos si en el localstorage hay un item "theme" y en caso contrario ejecutamos una funcion que lo crea con un valor por defecto
+    }else if(localStorage.getItem('theme') == undefined){
+        changetheme();
+    }
 });
+
+// Esta funcion lo que hace es asignar el theme a la etiqueta link que carga el tema y guardar el valor en el localstorage
+function changetheme(theme = "css/styles-green.css"){
+    $('#theme').attr('href',theme);
+    localStorage.setItem('theme',theme);
+}
