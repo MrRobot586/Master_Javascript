@@ -122,6 +122,21 @@ $(document).ready(function (){
     }else if(localStorage.getItem('theme') == undefined){
         changetheme();
     }
+
+    // Scroll animado hacia el top de la pagina | Usando jquery
+
+    /*
+        USando un boton activaremos una animacion de scroll hacia arriba para volver al inicio de la web.
+        Basicamente capturamos el enlace o boton de ir arriba, capturamos y prevenimos el evento default (que es redireccionar)
+        y aplicamos una animacion a la pagina completa.
+    */
+
+    $('#ir_arriba').click(function (e){// Capturamos el evento click en el boton con el id ir_arriba
+        e.preventDefault();// Cancelamos su comportamiento por defecto (Redirigir la pagina)
+        $('html, body').animate({// Aplicamos a html y body un animate enviando como parametro
+            scrollTop: 0// Un json con la animacion, deseada, en este caso "scrollTop" que hace scroll hacia arriba hasta x pixeles (en este caso hasta el pixel 0)
+        },500);// Y como segundo parametros enviamos un entero que sera la duracion de la animacion
+    });
 });
 
 // Esta funcion lo que hace es asignar el theme a la etiqueta link que carga el tema y guardar el valor en el localstorage

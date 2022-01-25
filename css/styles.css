@@ -50,7 +50,7 @@ body {
 #nav_bar ul li {
     height: 46px;
     display: inline-block;
-    transition: all 500ms;
+    transition: 500ms;
 }
 
 #nav_bar ul li a {
@@ -200,4 +200,18 @@ footer {
 
 #to_blue {
     background: #1F87C4;
+}
+
+#ir_arriba {
+    position: fixed;
+    top: 94%;
+    left: 93%;
+    background: #333;
+    color: white;
+    font-family: Helvetica, Arial;
+    font-size: 15px;
+    cursor: pointer;
+    border: 0px;
+    transition: 500ms;
+    padding: 15px;
 }
