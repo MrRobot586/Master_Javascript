@@ -20,65 +20,67 @@ $(document).ready(function (){
     */
 
     // Posts dinamicos | Usando momentJS - Libreria para poner fechas con disntintos formatos
-    var posts = [
-        /*
-            Creamos un array de objetos json que seran los post del sitio web
-            Que bien podria ser una api rest de la cual pidamos los posts... (osea una base de datos)
-
-            MomentJS: Es una libreria de JS que sirve para crear fechas de manera mas comoda y con un formato mas agradable
-            Aca lo usamos para darle fecha a cada post de forma estatica, fijandosela a que se creo hoy mismo...
-        */
-        {
-            title: "Prueba de titulo 1",
-            date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`, // En este caso formateamos la fecha con moment JS para que se vea lindo
-            content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Alias dolore porro asperiores in maxime cum beatae repudiandae.
-            Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
-        },
-        {
-            title: "Prueba de titulo 2",
-            date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`,
-            content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Alias dolore porro asperiores in maxime cum beatae repudiandae.
-            Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
-        },
-        {
-            title: "Prueba de titulo 3",
-            date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`,
-            content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Alias dolore porro asperiores in maxime cum beatae repudiandae.
-            Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
-        },
-        {
-            title: "Prueba de titulo 4",
-            date: "Publicado el " + moment().date() + " de " + moment().format("MMMM") + " del " + moment().year(),
-            content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Alias dolore porro asperiores in maxime cum beatae repudiandae.
-            Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
-        }
-    ];
-
+    if(location.href.indexOf('index') > -1){
+        var posts = [
+            /*
+                Creamos un array de objetos json que seran los post del sitio web
+                Que bien podria ser una api rest de la cual pidamos los posts... (osea una base de datos)
     
-    // Comprobamos de que nuestro array no este vacio (un poco de logica)
-    if(posts.length > 0){
-        let article;// Creamos una variable auxiliar para crear los post de uno en uno
-
-        posts.forEach(element => {// Recorremos el array
-            // Con un templante string creamos el post con el contenido del elemento recorrido
-            article = `
-            <article class="post">
-                <h2>${element.title}</h2>
-                <span>${element.date}</span>
-                <p>
-                    ${element.content}
-                </p>
-                <a href="#" class="btn_leermas">Leer mas...</a>
-            </article>
-            `;    
-
-            // Lo añadimos como hijo de la seccion de posts
-            $('#posts_section').append(article);
-        });
+                MomentJS: Es una libreria de JS que sirve para crear fechas de manera mas comoda y con un formato mas agradable
+                Aca lo usamos para darle fecha a cada post de forma estatica, fijandosela a que se creo hoy mismo...
+            */
+            {
+                title: "Prueba de titulo 1",
+                date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`, // En este caso formateamos la fecha con moment JS para que se vea lindo
+                content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
+            },
+            {
+                title: "Prueba de titulo 2",
+                date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`,
+                content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
+            },
+            {
+                title: "Prueba de titulo 3",
+                date: `Publicado el ${moment().date()} de ${moment().format("MMMM")} del ${moment().year()}`,
+                content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
+            },
+            {
+                title: "Prueba de titulo 4",
+                date: "Publicado el " + moment().date() + " de " + moment().format("MMMM") + " del " + moment().year(),
+                content: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Alias dolore porro asperiores in maxime cum beatae repudiandae.
+                Sit maxime error, dolor architecto laborum accusantium excepturi magnam aperiam ea possimus vitae.`
+            }
+        ];
+    
+        
+        // Comprobamos de que nuestro array no este vacio (un poco de logica)
+        if(posts.length > 0){
+            let article;// Creamos una variable auxiliar para crear los post de uno en uno
+    
+            posts.forEach(element => {// Recorremos el array
+                // Con un templante string creamos el post con el contenido del elemento recorrido
+                article = `
+                <article class="post">
+                    <h2>${element.title}</h2>
+                    <span>${element.date}</span>
+                    <p>
+                        ${element.content}
+                    </p>
+                    <a href="#" class="btn_leermas">Leer mas...</a>
+                </article>
+                `;    
+    
+                // Lo añadimos como hijo de la seccion de posts
+                $('#posts_section').append(article);
+            });
+        }
     }
 
     // Cambiador de temas | Usando distintos archivos CSS
@@ -137,6 +139,82 @@ $(document).ready(function (){
             scrollTop: 0// Un json con la animacion, deseada, en este caso "scrollTop" que hace scroll hacia arriba hasta x pixeles (en este caso hasta el pixel 0)
         },500);// Y como segundo parametros enviamos un entero que sera la duracion de la animacion
     });
+
+    // Login falson
+
+    /*
+        Para esto usaremos un sistema en el cual guardaremos la sesion del usuario en el localstorage y pondremos en el body
+        los datos del usuario cuando inicie sesion y en caso de que ya halla una sesion activa, entonces esta permanecera.
+
+        La dinamica es simple, se guardan los datos del usuario en el localstorage con la key de "sesion" de esta forma verificaremos si el usuario 
+        esta en sesion o no.
+    */
+
+    // Hacemos referencia a dos divs de el aside, uno es para la sesion y otro para iniciarla
+    const sesion_div = $('#sesion_on');
+    const login_div = $('#indentification');
+
+    // Verificamos que en el localstorage exista la key "sesion"
+    if(localStorage.getItem('sesion')){
+
+        // Antes que nada mostramos y ocultamos el contenido de los divs que corresponda
+        sesion_div.show();// En este caso mostramos el de sesion porque habria una sesion activa
+        login_div.hide();
+
+        // De ser asi, decodificamos el  json string que contiene como valor 
+        let sesion = JSON.parse(localStorage.getItem('sesion'));
+
+        // Encontramos el span dentro de el div con el id "sesion_on"
+        sesion_div.find('span')[1].append(sesion.nombre);// Y le colocamos como hijo el nombre del usuario en sesion
+        sesion_div.find('p').append(`<br><a href="#">Cerrar sesion...</a>`);// Ademas colocamos un boton para cerrar sesion en el parrafo que esta dentro de este mismo div
+
+        // Añadimos funcionalidad a ese boton o enlace
+        sesion_div.find('a').click(function(e){
+            e.preventDefault();// En este caso cancelamos el comportamiento por defecto
+            localStorage.removeItem('sesion');// Eliminamos la sesion
+            location.reload();// Y recargamos la pagina
+        });
+
+    }else{
+
+        // Mostramos y ocultamos los divs correspondientes
+        sesion_div.hide();// EN este caso mostramos el div de login porque se va a iniciar sesion
+        login_div.show();
+
+        // Escuchamos el evento submit en este formulario
+        login_div.submit(function (e){ 
+            e.preventDefault();// Cancelamos la recarga de la pagina
+
+            // Obtenemos los valores con jquery y los guardamos en variables
+            let nombre = $('#register_form input[name="nombre"]').val();
+            let email = $('#register_form input[name="mail"]').val();
+            let pass = $('#register_form input[name="pass"]').val();
+
+            // Comprobamos que no este vacios y procedemos a crear la sesion
+            if(nombre != '' && email != '' && pass != ''){
+                localStorage.setItem('sesion',JSON.stringify({
+                    nombre: nombre,
+                    email: email,
+                    pass: pass
+                }));
+
+                location.reload();// Ademas de recargar la pagina
+            }else{// En caso de estar vacios avisamos al usuario
+                alert("Rellene todos los campos del formulario de login para poder iniciar sesion...");
+            }
+        });
+    }
+
+    // Crear acordeon  de informacion | Jquery UI
+
+    /*
+        Usando Jquery UI, crearemos un acordeon aplicando el metodo correspondiente a la seccion "sobre mi"
+        Claro en tanto estemos en el archivo de la pagina correspondiente, es decir en el archivo "sobre_mi.html"
+    */
+    if(location.href.indexOf('sobre_mi') > -1){// Verificamos que estemos ahi
+        $('#sobre_mi').accordion();// Y aplicamos el metodo
+    }
+    
 });
 
 // Esta funcion lo que hace es asignar el theme a la etiqueta link que carga el tema y guardar el valor en el localstorage

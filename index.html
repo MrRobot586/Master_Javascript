@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="css/styles.css">
     <link id="theme" rel="stylesheet" href="#">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha256-6XMVI0zB8cRzfZjqKcD01PBsAy3FlDASrlC8SxCpInY=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.min.js" integrity="sha512-L6Trpj0Q/FiqDMOD0FQ0dCzE0qYT2TFpxkIpXRSWlyPvaLNkGEMRuXoz6MC5PrtcbXtgDLAAI4VFtPvfYZXEtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -30,11 +32,10 @@
 
             <nav id="nav_bar">
                 <ul>
-                    <li><a href="#">Inicio</a></li>
-                    <li><a href="#">Reloj</a></li>
-                    <li><a href="#">Calendario</a></li>
-                    <li><a href="#">Calculadora</a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="reloj.html">Reloj</a></li>
+                    <li><a href="sobre_mi.html">Sobre mi</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
                 </ul>
             </nav>
         </header>
@@ -47,14 +48,7 @@
 
         <div id="page_content">
             <div id="posts_section">
-                <article class="post">
-                    <h2>Prueba de titulo - Post</h2>
-                    <span>Fecha de publicacion</span>
-                    <p>
-                        Contenido...
-                    </p>
-                    <a href="#" class="btn_leermas">Leer mas...</a>
-                </article>
+                
             </div>
             
             <aside id="side_bar">
@@ -68,22 +62,29 @@
                     </p>
                 </div>
 
-                <div>
+                <div id="indentification">
                     <h4 class="side_h4"><span>Indentificate:</span></h4>
-
-                    <form id="login_form">
+                        
+                    <form id="register_form">
                         <label for="nombre">Nombre: </label><br>
                         <input type="text" name="nombre" /><br>
-                        
+                                
                         <label for="mail">E-mail: </label><br>
                         <input type="email" name="mail" /><br>
-            
+                    
                         <label for="contraseña">Contraseña: </label><br>
-                        <input type="password" name="contraseña" /><br>
-
-                        <input type="submit" value="Registrar">
-                    </form>
+                        <input type="password" name="pass" /><br>
+        
+                        <input type="submit" value="Registro">
+                    </form>  
                 </div>
+
+                <div id="sesion_on">
+                    <h4 class="side_h4"><span>Bienvenid@</span></h4>
+                    <span></span>
+                    <p></p>
+                </div>
+
             </aside>
 
             <div class="clearfix"></div>
