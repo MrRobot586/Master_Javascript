@@ -214,6 +214,17 @@ $(document).ready(function (){
     if(location.href.indexOf('sobre_mi') > -1){// Verificamos que estemos ahi
         $('#sobre_mi').accordion();// Y aplicamos el metodo
     }
+
+    // Reloj en linea | Usando set interval y momentJS
+
+    /*
+        Usando setinterval crearemos un reloj que se actualice cada segundo. 
+    */
+    if(location.href.indexOf('reloj') > -1){// Obviamente verificamos que estemos en la pagina que corresponde al reloj
+        setInterval(() => {// Creamos un intervalo con un callback como primer parametro
+            $('#reloj #hora').text(moment().format('hh:mm:ss A'));// Despues seleccionamos en h2 con el id hora dentro del elemento con id reloj y cambiamos su texto por la hora actual usando momentJS
+        }, 1000);// El segundo parametro como siempre sera el intervalo, en este caso cada un segundo...
+    }
     
 });
 
