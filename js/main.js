@@ -225,6 +225,29 @@ $(document).ready(function (){
             $('#reloj #hora').text(moment().format('hh:mm:ss A'));// Despues seleccionamos en h2 con el id hora dentro del elemento con id reloj y cambiamos su texto por la hora actual usando momentJS
         }, 1000);// El segundo parametro como siempre sera el intervalo, en este caso cada un segundo...
     }
+
+
+    // Formulario de contacto | Usando plugin de jquery "form validator"
+
+    /*
+        Para esto se usa un plugin llamado "form validator" de jquery, funciona aplicando un metodo a una pagina.
+        A este metodo como parametro se le incluye un objeto JSON con las opciones de validacion.
+
+        Este metodo aplica la validacion a cualquier formulario dentro de la pagina donde se carga el script, en este caso,
+        en la pagina de contacto.
+
+        A los formularios que se quierean validar se les pone en cada input propiedades para validar cierto parametro como:
+            - Data-validation: Numeric | Sirve para valdar si el campo contiene numeros
+
+        Como opcion se le coloca en este caso el lenguaje de los mensajes de validacion.
+
+        por supuesto los estilos de los mensajes tras la validacion, se pueden modificar con CSS.
+    */
+    if(location.href.indexOf('contacto') > -1){
+        $.validate({
+            lang: 'es'
+        });
+    }
     
 });
 

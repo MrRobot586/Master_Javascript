@@ -221,6 +221,34 @@ footer {
     padding: 15px;
 }
 
+#contacto h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+    text-align: center;
+    color: #333;  
+}
+
+#contacto input[name="nombre"],
+#contacto input[name="apellido"],
+#contacto input[name="edad"],
+#contacto input[name="fecha_nacimiento"],
+#contacto textarea {
+    display: block;
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    width: 50%;
+}
+
+#contacto input[type="submit"] {
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #eee;
+    color: #333;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
 #reloj {
     font-size: 50px;
     color: white;
@@ -232,4 +260,17 @@ footer {
 
 #reloj h2 {
     padding: 20px;
+}
+
+.help-block{
+    display: block;
+}
+
+.form-error {
+    padding: 10px;
+    width: 50%;
+    background: red;
+    text-align: center;
+    color: white;
+
 }

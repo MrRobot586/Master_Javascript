@@ -18,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.min.js" integrity="sha512-L6Trpj0Q/FiqDMOD0FQ0dCzE0qYT2TFpxkIpXRSWlyPvaLNkGEMRuXoz6MC5PrtcbXtgDLAAI4VFtPvfYZXEtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
     <script type="text/JavaScript" src="js/main.js"></script>
 </head>
 <body>
@@ -49,7 +50,25 @@
         <div id="page_content">
             <div id="posts_section">
                 <div id="contacto">
-                       
+                    <h2>Enviame un mensaje:</h2>
+                    <form action="#" id="contact_me">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" name="nombre" data-validation="alphanumeric">
+
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" name="apellido" data-validation="alphanumeric">
+
+                        <label for="edad">Edad:</label>
+                        <input type="number" name="edad" data-validation="numeric required">
+
+                        <label for="fecha_nacimiento">Fecha de nacimiento: </label>
+                        <input type="date" name="fecha_nacimiento" data-validation="required birthdate">
+
+                        <label for="mensaje">Mensaje:</label>
+                        <textarea name="mensaje" id="" cols="30" rows="10" data-validation="required alphanumeric"></textarea>
+
+                        <input type="submit" value="Enviar">
+                    </form>   
                 </div>
             </div>
             
