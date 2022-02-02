@@ -1,92 +1,61 @@
 /*
-    TypeScript - Tipos de datos y variables
-    
-    - Definicion de variables | Tipado fuerte: Las variables se definen con let o var y para definir su tipo de dato, se colocan ":" seguido de tipo de datos.
-      Una vez asignado el tipo de dato, este es estatico, osea no se puede asignar un dato de otro tipo a esa variable.
-      Los tipos de datos son:
-        string: cadena de texto
-        number: numero
-        boolean: true o false
-        any: Cualquier tipo de dato | Basicaimente tipado debil. Se puede cambiar el tipo de dato posteriormente
-        arrays: Colecciones de elementos
+  Programacion Orientada a Objetos en TypeScript
+    Este lenguaje tiene una version mas robusta de la programacion orientada a objetos que la que provee JavaScript,
+    ademas que al transpilarse a javascript convierte el codigo a compatible con todos los navegadores, incluyendo navegadores
+    antiguos.
 
-      En caso de reasignar un valor de otro tipo a una variable cuyo tipo ya fue asignado, el compilador dara un error, pero se pasara por alto,
-      solo dara la advertencia y compilara finalmente en JavaScript.
-    
-    - Multiples datos: Se pueden asignar multiples tipos de datos a una misma variable, usando la pipe "\", se asigna otro tipo de dato a una variable.
-      
-      ejemplo: let variable: number | string = "Verga";
+    P.O.O: COmo se usa en Ts no es aplicable a JS nativo.
 
-    - Tipos de datos personalizados: Se pueden definir tipos de datos personalizados con la palabra type seguido del pseudonombre del tipo de dato
-      para despues asignar los tipos de datos aceptados como si fuece una variable:
-    
-      ejemplo: type datopersonalizado = number | boolean; // Este tipo de dato acepta numeros y booleanos
-    
-    - Var vs Let: La diferencia es que let funciona a nivel de bloque y var a nivel global (o de scope).
-      Es decir, let funciona dentro de un if, si es definido ahi su alcanze se limita a ese bloque, mientras que 
-      var si se define una variable a nivel de funcion entonces esa vairable estara presente en bloques de esa funcion.
+    Un objeto es una entidad con propiedades y metodos, que se asemeja a un objeto de la vida real. Un objeto se crea a partir de una clase.
+    Los objetos pueden tener todo tipo de propiedades que pueden ser publicas, privadas o protegidas, dependiendo de como sean
+    podran editarse o no fuera del objeto o solo mediante un metodo.
+    Los metodos pueden obtener datos de las propiedades o setearlos (osea obtener su valor o cambiarlo). Si una propiedad es privada
+    solo se puede cambiar su valor mediante un metodo del objeto, si es publica se podra setear haciendo referencia al objeto y propiedad.
+    Los metodos y propiedades se definene en la clase a partir de la cual se crea un objeto.
+    Se pueden crear muchos objetos a partir de una misma clase.
+    Un objeto se crea instanciando una clase en una variable. 
+      Ejemplo:var objeto = new Camiseta();
 
-    - Definicion de funciones con parametros de tipado fuerte: Con typeScript se pueden definir los tipos de datos que entran y salen de una funcion.
-      Es decir sus parametros y el valor que devuelve:
+  Clases en TS:
+    Molde para crear objetos que compartan ciertas caracteristicas, ejemeplo: un molde para crear una bicicleta
+    En una clase se define las propiedades del objeto y sus metodos.
+      - Las propiedades: Son valores guardados en variables. Ejemplo: Una bicicleta tiene marca, esa seria una caracteristica o propiedad.
+      - Los metodos: Son acciones o funciones que realiza el objeto en cuestion. Ejemplo: Una bicicleta rueda, ese seria un metodo.
 
-      ejemplo:
-      
-      function nombre(parm:number):string{
-        ...
-      }
+    Para definir una clase se usa la palabra reservada class, seguido del nombre de la clase y llaves. El nombre de la clase
+    debe tener la primera letra en mayuscula.
 
-      Como se aprecia solo se coloca ":" seguido de el tipo de dato del parametro y luego de los parentecis donde van los parametros
-      ":" y el tipo de dato que devolvera al funcion al ejecutarse. En este caso recibira un numero y devolvera un string.
+    Para definir una propiedad, se coloca la visibilidad de la propiedad, seguido del nombre,":" y el tipado, se cierra con ";"
+      Una propiedad puede ser publica (public), privada (private) o protegida (protected). Dependiendo de esto la propiedad podra o no ser
+      editada fuera del objeto.
+
+    Para definir un metodo, 
+
+    Es recomendable definir la clase en un fichero a parte y que este tenga el nombre de la clase como tal. 
 */
 
-// Variables y tipado fuerte:
+class Camiseta{// Definicion de la clase:
+  // Propiedades:
+  public color:string;
+  public modelo:string;
+  public marca:string;
+  public talla:string;
+  public precio:number;
 
-let cadena:string = "Cadena de texto";// String
+  // Metodos:
+  public setColor(color){// Metodo set - Para cambiar el color
+    this.color = color;
+  }
 
-let numero:number = 18;// Numerico
-
-let booleano:boolean = true;// Booleano
-
-let any:any = 16;// Any
-any = "Dieciseis";
-
-var lenguajes:Array<string> = ["PHP", "JS", "CSS"];// Array | Definicion 1: Definiciendo el nombre, seguido de la palabra Array y el tipo de datos que tiene el array
-
-var numeros:number[] = [1,2,3,4,5];// Array | Definicion 2: Definiendo el nombre el tipo de dato del array y corchetes, para despues igualar los valores del array
-
-
-// Multiples tipos de datos en una variable:
-
-var nombre: string | number = "Diego Oropeza";// Con el pipe "|" se pueden asignar 2 tipos de datos validos para una variable. En este caso son validos strings y numeros, como valores para "nombre"
-
-
-// Tipos de datos personalizados:
-
-type letrasonumeros = string | number;// Con la palara reservada "type" se define un tipo de dato personalizado
-
-var nuevodato: letrasonumeros = "Diego Oropeza";
-
-
-// Let Vs Var:
-
-var numero1:number = 10;
-var numero2:number = 12;
-
-if(numero1 == 10){
-  let numero1: number = 44;
-  var numero2 = 55;// Esto reasignara o redefinira la variable ya existente
-    
-
-  console.log(numero1, numero2);// Salida de prueba
+  public getColor(){// Metodo get - Para obtener el color del objeto
+    return this.color;
+  }
 }
 
-console.log(numero1, numero2);// Salida de prueba 2
+// Instanciar un nuevo objeto camiseta:
+var camisa = new Camiseta();
 
+// Usar el metodo setColor() para cambiar el color al nuevo objeto
+camisa.setColor("Rojo");
 
-// Funciones y el tipado fuerte en TypeScript:
-
-function getnumero(numero:number = 12):string{// Esta funcion recibe un numero
-  return "El numero que devuelve la funcion es: " + numero;// Y devuelve un string
-}
-
-console.log(getnumero());
+console.log(camisa.getColor());// Usar el metodo getColor() para obtener el color de la camisa, anteriormente e
