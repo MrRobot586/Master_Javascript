@@ -1,28 +1,31 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Herencia: Es un cocepto en el cual una clase hija puede heredar propiedades y metodos de una clase madre.
-    Es decir, se crea una clase a partir de otra, y la clase resultante hereda de esa otra clase sus propiedades  y atributos,
-    con lo cual esta nueva clase seria una extencion o una version alterna de la clase anterior, tenidno claro sus atributos y 
-    metodos propios tambien.
+    Decoradores: Es un patron de diseño que en pocas palabras sirven para decorar una clase, es decir, le implementan nuevos metodos o propiedades
+    a la clase que se le aplica. Osea modifica los metadatos de una clase.
 
-    En conclusion: Se hace una extencion de una clase, creando una nueva con las propiedades de la anterior y añadiendo nuevas.
-
-    Para heredar en una clase hija las propiedades de una madre se crea una nueva clase, pero se usa la palabra "extends" seguido del
-    nombre de la clase madre y llaves detro de las cuales se colocan las nuevas caracteristicas de esa nueva clase. Ejemplo:
-      
-      class Sudadera extends Camiseta{
-        public prop:type;
-        public metodo(){
-          ...
-        };
-      }
+    Se declara como una funcion que a su vez devuelve otra que recibe como parametro la clase a la que se aplica el decorador y dentro de la cual
+    se define que se hahra con esa clase, ya sea darle un nuevo metodo como es el ejemplo o editar uno ya existente.
+    
 */
 
+// Decorador: En este caso este decorador añade un metodo a la clase
+function estampar(logo:string) {// Esta funcion devolvera una funcion anonima
+  return function(target: Function){// Que recibe como parametro target (que seria la clase a la que se aplique el decorador)
+    target.prototype.estampado = function ():void {// A target el añade un prototype o clase llamado "estampado" que tiene como funcion
+      console.log("Camiseta estampada con el logo: " + logo);// Este console log y ademas no devuelve nada (por eso el :void)
+      //console.log("Color de la camiseta: " + this.color);// En este caso se toma el valor de la propiedad color y se muestra
+    }
+  }
+}
+
+// Interface
 interface CamisetaBase{
   setColor(color);
   getColor();
 }
 
+// Clase que implementa interface
+@estampar("Nike")// De esta forma se le aplica un decorador a una clase, no se coloca ";", solo se coloca la linea y ya esta
 class Camiseta implements CamisetaBase{
   public color:string;
   public modelo:string;
@@ -60,9 +63,8 @@ var datos = {
   precio: 12.5
 };
 
-// De esta forma se hereda de una clase madre las propiedades y metodos que esta posea:
-class Sudadera extends Camiseta {// Creamos una nueva clase le damos un nombre y usamos "extends" y el nombre de la clase madre.
-  // A continuacion como en una clase normal, se colocan las propiedades y metodos que tendra esta clase hija
+// Clase hija de la clase Camiseta
+class Sudadera extends Camiseta {
   public capucha:boolean;
 
   public setCapucha(val){
@@ -75,11 +77,6 @@ class Sudadera extends Camiseta {// Creamos una nueva clase le damos un nombre y
 }
 
 // Instanciar un nuevo objeto sudadera:
-var camisa = new Sudadera(datos);
+var camisa = new Camiseta(datos);
 
-// Usamos uno de los meotodos que se crearon en la clase al heredar las propiedades de camisa y que ahora posee el objeto creado
-camisa.setCapucha(true);
-
-console.log(camisa.getCapucha());// Imprimimos getCapucha para ver su valor
-
-// Nota: En este caso la clase hija es una variacion de una camisa, una sudadera que tiene una capucha
+console.log(camisa.estampado());

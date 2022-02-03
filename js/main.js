@@ -1,21 +1,11 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Herencia: Es un cocepto en el cual una clase hija puede heredar propiedades y metodos de una clase madre.
-    Es decir, se crea una clase a partir de otra, y la clase resultante hereda de esa otra clase sus propiedades  y atributos,
-    con lo cual esta nueva clase seria una extencion o una version alterna de la clase anterior, tenidno claro sus atributos y
-    metodos propios tambien.
+    Decoradores: Es un patron de diseño que en pocas palabras sirven para decorar una clase, es decir, le implementan nuevos metodos o propiedades
+    a la clase que se le aplica. Osea modifica los metadatos de una clase.
 
-    En conclusion: Se hace una extencion de una clase, creando una nueva con las propiedades de la anterior y añadiendo nuevas.
-
-    Para heredar en una clase hija las propiedades de una madre se crea una nueva clase, pero se usa la palabra "extends" seguido del
-    nombre de la clase madre y llaves detro de las cuales se colocan las nuevas caracteristicas de esa nueva clase. Ejemplo:
-      
-      class Sudadera extends Camiseta{
-        public prop:type;
-        public metodo(){
-          ...
-        };
-      }
+    Se declara como una funcion que a su vez devuelve otra que recibe como parametro la clase a la que se aplica el decorador y dentro de la cual
+    se define que se hahra con esa clase, ya sea darle un nuevo metodo como es el ejemplo o editar uno ya existente.
+    
 */
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -32,6 +22,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+// Decorador: En este caso este decorador añade un metodo a la clase
+function estampar(logo) {
+    return function (target) {
+        target.prototype.estampado = function () {
+            console.log("Camiseta estampada con el logo: " + logo); // Este console log y ademas no devuelve nada (por eso el :void)
+            //console.log("Color de la camiseta: " + this.color);// En este caso se toma el valor de la propiedad color y se muestra
+        };
+    };
+}
+// Clase que implementa interface
 var Camiseta = /** @class */ (function () {
     function Camiseta(data) {
         this.color = data.color;
@@ -51,6 +57,9 @@ var Camiseta = /** @class */ (function () {
     Camiseta.prototype.getColor = function () {
         return this.color;
     };
+    Camiseta = __decorate([
+        estampar("Nike") // De esta forma se le aplica un decorador a una clase, no se coloca ";", solo se coloca la linea y ya esta
+    ], Camiseta);
     return Camiseta;
 }());
 var datos = {
@@ -60,7 +69,7 @@ var datos = {
     talla: "L",
     precio: 12.5
 };
-// De esta forma se hereda de una clase madre las propiedades y metodos que esta posea:
+// Clase hija de la clase Camiseta
 var Sudadera = /** @class */ (function (_super) {
     __extends(Sudadera, _super);
     function Sudadera() {
@@ -75,8 +84,5 @@ var Sudadera = /** @class */ (function (_super) {
     return Sudadera;
 }(Camiseta));
 // Instanciar un nuevo objeto sudadera:
-var camisa = new Sudadera(datos);
-// Usamos uno de los meotodos que se crearon en la clase al heredar las propiedades de camisa y que ahora posee el objeto creado
-camisa.setCapucha(true);
-console.log(camisa.getCapucha()); // Imprimimos getCapucha para ver su valor
-// Nota: En este caso la clase hija es una variacion de una camisa, una sudadera que tiene una capucha
+var camisa = new Camiseta(datos);
+console.log(camisa.estampado());
