@@ -1,20 +1,28 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Interfaces: Se puede definir un modelo para una clase espesifica, esto con el fin de ser estricto con las clases que se usan
-    para la creacion de objetos. Una interfaz, define los metodos y propiedades obligatorias que deben existir en una clase.
+    Herencia: Es un cocepto en el cual una clase hija puede heredar propiedades y metodos de una clase madre.
+    Es decir, se crea una clase a partir de otra, y la clase resultante hereda de esa otra clase sus propiedades  y atributos,
+    con lo cual esta nueva clase seria una extencion o una version alterna de la clase anterior, tenidno claro sus atributos y 
+    metodos propios tambien.
 
-    Estas interfaces se pueden aplicar a una clase.
-    Conclusion: Es como una clase de una clase, reglas a cumplir para crear una clase que se pueden o no implementar.
+    En conclusion: Se hace una extencion de una clase, creando una nueva con las propiedades de la anterior y añadiendo nuevas.
+
+    Para heredar en una clase hija las propiedades de una madre se crea una nueva clase, pero se usa la palabra "extends" seguido del
+    nombre de la clase madre y llaves detro de las cuales se colocan las nuevas caracteristicas de esa nueva clase. Ejemplo:
+      
+      class Sudadera extends Camiseta{
+        public prop:type;
+        public metodo(){
+          ...
+        };
+      }
 */
 
-// De esta forma se crea una interfaz: Con la palabra "interface", seguida del nombre y llaves, dentro de las cuales se colocaran los metodos obligatorios de la clase
 interface CamisetaBase{
-  // Metodos obligatorios: Se colocan los nombres y los parametros de cada metodo, para predefinirlos
   setColor(color);
   getColor();
 }
 
-// Para implementar una interfaz a una camiseta, se coloca la palabra "implements" luego del nombre de la clase, seguido del nombre de la interface
 class Camiseta implements CamisetaBase{
   public color:string;
   public modelo:string;
@@ -45,14 +53,33 @@ class Camiseta implements CamisetaBase{
 }
 
 var datos = {
-    color: "Rojo",
-    modelo: "Manga larga",
-    marca: "Nike",
-    talla: "L",
-    precio: 12.5
+  color: "Rojo",
+  modelo: "Manga larga",
+  marca: "Nike",
+  talla: "L",
+  precio: 12.5
 };
 
-// Instanciar un nuevo objeto camiseta:
-var camisa = new Camiseta(datos);
+// De esta forma se hereda de una clase madre las propiedades y metodos que esta posea:
+class Sudadera extends Camiseta {// Creamos una nueva clase le damos un nombre y usamos "extends" y el nombre de la clase madre.
+  // A continuacion como en una clase normal, se colocan las propiedades y metodos que tendra esta clase hija
+  public capucha:boolean;
 
-console.log(camisa)
+  public setCapucha(val){
+    this.capucha = val;
+  }
+
+  public getCapucha(){
+    return this.capucha;
+  }
+}
+
+// Instanciar un nuevo objeto sudadera:
+var camisa = new Sudadera(datos);
+
+// Usamos uno de los meotodos que se crearon en la clase al heredar las propiedades de camisa y que ahora posee el objeto creado
+camisa.setCapucha(true);
+
+console.log(camisa.getCapucha());// Imprimimos getCapucha para ver su valor
+
+// Nota: En este caso la clase hija es una variacion de una camisa, una sudadera que tiene una capucha
