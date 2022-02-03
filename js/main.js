@@ -1,24 +1,19 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Metodo Constructor: Este como su nombre lo indica, construye el objeto al instanciarlo o al crearlo.
-    Este metodo se encarga de asignarle un valor a las propiedades del objeto por medio de la instancia,
-    es decir, al instanciar un objeto nuevo de una clase, como parametro se pasan los valores que se asignaran a
-    las propiedades de este y el metodo constructor se ejecuta para asignar los valores. Ejemplo:
+    Interfaces: Se puede definir un modelo para una clase espesifica, esto con el fin de ser estricto con las clases que se usan
+    para la creacion de objetos. Una interfaz, define los metodos y propiedades obligatorias que deben existir en una clase.
 
-      var objeto = new verga(Tamaño, grosor);
-
-    El metodo constructor se define en la clase con la palabra reservada "constructor", este nunca devuelve ningun valor.
+    Estas interfaces se pueden aplicar a una clase.
+    Conclusion: Es como una clase de una clase, reglas a cumplir para crear una clase que se pueden o no implementar.
 */
+// Para implementar una interfaz a una camiseta, se coloca la palabra "implements" luego del nombre de la clase, seguido del nombre de la interface
 var Camiseta = /** @class */ (function () {
-    // Metodo constructor: En este caso el constructor recibe un objeto JSON para los datos que se asignaran al nuevo objeto, pero bien podria recibir parametros individuales
     function Camiseta(data) {
-        // Es te metodo no hace mas que asignar lo que obtiene como parametro como valor a las propiedades de un neuvo objeto creado con esta clase
-        this.color = data.color; // Se hace referencia al mismo objeto con el operador "this"
+        this.color = data.color;
         this.modelo = data.modelo;
         this.marca = data.marca;
         this.talla = data.talla;
-        // Nota: Tambien se podrian hacer comprobaciones de los parametros para poder asignar los valores como si es un numero y cosas asi
-        if (!isNaN(data.precio)) { // Como aca que se comprueba si es un numero el parametro
+        if (!isNaN(data.precio)) {
             this.precio = data.precio;
         }
         else {
