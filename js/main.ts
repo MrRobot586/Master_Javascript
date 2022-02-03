@@ -1,37 +1,31 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Decoradores: Es un patron de diseño que en pocas palabras sirven para decorar una clase, es decir, le implementan nuevos metodos o propiedades
-    a la clase que se le aplica. Osea modifica los metadatos de una clase.
+    Visibilidad de propiedades y metodos: Los metodos y propiedades pueden tener una visivilidad en el resto del codigo de la aplicacion.
+    La visivilidad de una propiedad o metodo puede ser:
 
-    Se declara como una funcion que a su vez devuelve otra que recibe como parametro la clase a la que se aplica el decorador y dentro de la cual
-    se define que se hahra con esa clase, ya sea darle un nuevo metodo como es el ejemplo o editar uno ya existente.
+      Public: Esta propiedad sera accesible desde cualquier lugar en el codigo de la aplicacion.
+      Private: Esta propiedad sera accesible solo desde la clase que la contenga y desde una clase que herede las propiedades de esa clase.
+      Protected: Esta propiedad sera accesible solo desde la clase que la contenga.
+
+      Con "accesible desde la clase", se refiere a que solo se puede cambiar su valor desde la clase. Osea si se crea un objeto y este tiene
+      definido en su clase un metodo que modifica una propiedad protected o private, entonces esta se podra modificar solo a traves de ese metodo.
     
 */
 
-// Decorador: En este caso este decorador añade un metodo a la clase
-function estampar(logo:string) {// Esta funcion devolvera una funcion anonima
-  return function(target: Function){// Que recibe como parametro target (que seria la clase a la que se aplique el decorador)
-    target.prototype.estampado = function ():void {// A target el añade un prototype o clase llamado "estampado" que tiene como funcion
-      console.log("Camiseta estampada con el logo: " + logo);// Este console log y ademas no devuelve nada (por eso el :void)
-      //console.log("Color de la camiseta: " + this.color);// En este caso se toma el valor de la propiedad color y se muestra
-    }
-  }
-}
-
-// Interface
-interface CamisetaBase{
-  setColor(color);
-  getColor();
-}
-
-// Clase que implementa interface
-@estampar("Nike")// De esta forma se le aplica un decorador a una clase, no se coloca ";", solo se coloca la linea y ya esta
-class Camiseta implements CamisetaBase{
+class Camiseta{
   public color:string;
   public modelo:string;
-  public marca:string;
-  public talla:string;
-  public precio:number;
+  public marca:string;// Propiedad publica: Accesible dede donde sea
+  private talla:string;// Propiedad privada: Solo accesible para clases que hereden esta o esta misma
+  protected precio:number;// Propiedad protegida: solo accesible desde esta clase
+
+  public setPrecio(newprice){
+    this.precio = newprice;
+  }
+
+  public getPrecio(){
+    return this.precio;
+  }
 
   constructor(data){
     this.color = data.color;
@@ -55,6 +49,11 @@ class Camiseta implements CamisetaBase{
   }
 }
 
+class Sudadera extends Camiseta{
+  public capucha: boolean;
+}
+
+
 var datos = {
   color: "Rojo",
   modelo: "Manga larga",
@@ -63,20 +62,13 @@ var datos = {
   precio: 12.5
 };
 
-// Clase hija de la clase Camiseta
-class Sudadera extends Camiseta {
-  public capucha:boolean;
-
-  public setCapucha(val){
-    this.capucha = val;
-  }
-
-  public getCapucha(){
-    return this.capucha;
-  }
-}
-
-// Instanciar un nuevo objeto sudadera:
+// Instanciar un nuevo objeto camisa:
 var camisa = new Camiseta(datos);
 
-console.log(camisa.estampado());
+camisa.setPrecio(6);
+
+console.log(camisa);
+
+var sudadera = new Sudadera(datos);
+
+console.log(sudadera);

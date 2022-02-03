@@ -1,10 +1,14 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Decoradores: Es un patron de diseño que en pocas palabras sirven para decorar una clase, es decir, le implementan nuevos metodos o propiedades
-    a la clase que se le aplica. Osea modifica los metadatos de una clase.
+    Visibilidad de propiedades y metodos: Los metodos y propiedades pueden tener una visivilidad en el resto del codigo de la aplicacion.
+    La visivilidad de una propiedad o metodo puede ser:
 
-    Se declara como una funcion que a su vez devuelve otra que recibe como parametro la clase a la que se aplica el decorador y dentro de la cual
-    se define que se hahra con esa clase, ya sea darle un nuevo metodo como es el ejemplo o editar uno ya existente.
+      Public: Esta propiedad sera accesible desde cualquier lugar en el codigo de la aplicacion.
+      Private: Esta propiedad sera accesible solo desde la clase que la contenga y desde una clase que herede las propiedades de esa clase.
+      Protected: Esta propiedad sera accesible solo desde la clase que la contenga.
+
+      Con "accesible desde la clase", se refiere a que solo se puede cambiar su valor desde la clase. Osea si se crea un objeto y este tiene
+      definido en su clase un metodo que modifica una propiedad protected o private, entonces esta se podra modificar solo a traves de ese metodo.
     
 */
 var __extends = (this && this.__extends) || (function () {
@@ -22,22 +26,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-// Decorador: En este caso este decorador añade un metodo a la clase
-function estampar(logo) {
-    return function (target) {
-        target.prototype.estampado = function () {
-            console.log("Camiseta estampada con el logo: " + logo); // Este console log y ademas no devuelve nada (por eso el :void)
-            //console.log("Color de la camiseta: " + this.color);// En este caso se toma el valor de la propiedad color y se muestra
-        };
-    };
-}
-// Clase que implementa interface
 var Camiseta = /** @class */ (function () {
     function Camiseta(data) {
         this.color = data.color;
@@ -51,17 +39,27 @@ var Camiseta = /** @class */ (function () {
             this.precio = 0;
         }
     }
+    Camiseta.prototype.setPrecio = function (newprice) {
+        this.precio = newprice;
+    };
+    Camiseta.prototype.getPrecio = function () {
+        return this.precio;
+    };
     Camiseta.prototype.setColor = function (color) {
         this.color = color;
     };
     Camiseta.prototype.getColor = function () {
         return this.color;
     };
-    Camiseta = __decorate([
-        estampar("Nike") // De esta forma se le aplica un decorador a una clase, no se coloca ";", solo se coloca la linea y ya esta
-    ], Camiseta);
     return Camiseta;
 }());
+var Sudadera = /** @class */ (function (_super) {
+    __extends(Sudadera, _super);
+    function Sudadera() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Sudadera;
+}(Camiseta));
 var datos = {
     color: "Rojo",
     modelo: "Manga larga",
@@ -69,20 +67,9 @@ var datos = {
     talla: "L",
     precio: 12.5
 };
-// Clase hija de la clase Camiseta
-var Sudadera = /** @class */ (function (_super) {
-    __extends(Sudadera, _super);
-    function Sudadera() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Sudadera.prototype.setCapucha = function (val) {
-        this.capucha = val;
-    };
-    Sudadera.prototype.getCapucha = function () {
-        return this.capucha;
-    };
-    return Sudadera;
-}(Camiseta));
-// Instanciar un nuevo objeto sudadera:
+// Instanciar un nuevo objeto camisa:
 var camisa = new Camiseta(datos);
-console.log(camisa.estampado());
+camisa.setPrecio(6);
+console.log(camisa);
+var sudadera = new Sudadera(datos);
+console.log(sudadera);
