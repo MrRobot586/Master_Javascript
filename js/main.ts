@@ -1,74 +1,36 @@
 /*
   Programacion Orientada a Objetos en TypeScript
-    Visibilidad de propiedades y metodos: Los metodos y propiedades pueden tener una visivilidad en el resto del codigo de la aplicacion.
-    La visivilidad de una propiedad o metodo puede ser:
+    Modulos internos-externos: Sirven para organizar las funcionalidades de una aplicacion.
+	Puede ser en modulos internos en un mismo fichero o externos en varios otros que luego se importan.
+	
+	Un modulo es un conjunto de funcionalidades organizadas dentro de un fichero que luego se puede importar.
+	Un modulo se define con la palabra module.
 
-      Public: Esta propiedad sera accesible desde cualquier lugar en el codigo de la aplicacion.
-      Private: Esta propiedad sera accesible solo desde la clase que la contenga y desde una clase que herede las propiedades de esa clase.
-      Protected: Esta propiedad sera accesible solo desde la clase que la contenga.
-
-      Con "accesible desde la clase", se refiere a que solo se puede cambiar su valor desde la clase. Osea si se crea un objeto y este tiene
-      definido en su clase un metodo que modifica una propiedad protected o private, entonces esta se podra modificar solo a traves de ese metodo.
-    
 */
+'use strict'
 
-class Camiseta{
-  public color:string;
-  public modelo:string;
-  public marca:string;// Propiedad publica: Accesible dede donde sea
-  private talla:string;// Propiedad privada: Solo accesible para clases que hereden esta o esta misma
-  protected precio:number;// Propiedad protegida: solo accesible desde esta clase
+// De esta forma se crea un modulo
+module tienda {// La palabra reservada "module" y el nombre, dentro de las llaves se declaran las cosas dentro del modulo
+	// En este caso se exportan las clases para poder luego importarlas
+	export class informatica{
+		private nombre: string;
+		public getName(){
+			return this.nombre;
+		}
+	}
 
-  public setPrecio(newprice){
-    this.precio = newprice;
-  }
+	export class ropa{
+		private nombre: string;
+		public getName(){
+			return this.nombre;
+		}
+	}
 
-  public getPrecio(){
-    return this.precio;
-  }
-
-  constructor(data){
-    this.color = data.color;
-    this.modelo = data.modelo;
-    this.marca = data.marca;
-    this.talla = data.talla;
-
-    if(!isNaN(data.precio)){
-      this.precio = data.precio;
-    }else{
-      this.precio = 0;
-    }
-  }
-
-  public setColor(color){
-    this.color = color;
-  }
-
-  public getColor(){
-    return this.color;
-  }
 }
 
-class Sudadera extends Camiseta{
-  public capucha: boolean;
-}
+// Posterior a esto, cargamos o importamos el modulo, pero espesificamente la clase de informatica
+import Iformatica = tienda.informatica;// Es decir importamos la clase informatica del modulo tienda
 
+var tienda_informatica = new Iformatica();// Ahora es posible usar esa clase e instanciarla, usando la referencia que se declaro en el import
 
-var datos = {
-  color: "Rojo",
-  modelo: "Manga larga",
-  marca: "Nike",
-  talla: "L",
-  precio: 12.5
-};
-
-// Instanciar un nuevo objeto camisa:
-var camisa = new Camiseta(datos);
-
-camisa.setPrecio(6);
-
-console.log(camisa);
-
-var sudadera = new Sudadera(datos);
-
-console.log(sudadera);
+console.log(tienda_informatica);
